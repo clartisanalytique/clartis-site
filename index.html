@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clartis Analytique — L'essentiel, d'un seul coup d'œil</title>
+<meta name="description" content="Clartis transforme vos données en tableaux de bord Power BI clairs et interactifs. Décidez en confiance, sans perdre de temps.">
+<link rel="stylesheet" href="style.css">
+<style>
+/* ── Hero ─────────────────────────────────── */
+.hero {
+  min-height: calc(100vh - var(--nav-h));
+  background: var(--marine2);
+  display: flex; align-items: center;
+  padding: 80px 24px; position: relative; overflow: hidden;
+}
+.hero__bg {
+  position: absolute; inset: 0; pointer-events: none;
+}
+.hero__inner {
+  max-width: var(--max-w); margin: 0 auto;
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 64px; align-items: center;
+}
+.hero__eyebrow {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--lime); display: flex; align-items: center; gap: 10px;
+  margin-bottom: 24px;
+}
+.hero__eyebrow::before {
+  content: ""; display: block; width: 24px;
+  height: 1.5px; background: var(--lime); border-radius: 2px;
+}
+.hero__title {
+  font-family: var(--display);
+  font-weight: 800; font-size: clamp(44px, 6vw, 80px);
+  line-height: .95; letter-spacing: -.02em;
+  color: #fff; margin-bottom: 28px;
+}
+.hero__title em { color: var(--coral); font-style: normal; }
+.hero__desc {
+  font-size: 17px; color: rgba(255,255,255,.55);
+  line-height: 1.7; max-width: 42ch; margin-bottom: 40px;
+}
+.hero__actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.hero__btn-outline {
+  border: 1.5px solid rgba(255,255,255,.3);
+  color: #fff;
+}
+.hero__stats {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 1px; background: rgba(255,255,255,.08);
+  border-radius: 14px; overflow: hidden; margin-top: 48px;
+}
+.hero__stat {
+  background: rgba(255,255,255,.03);
+  padding: 22px 18px;
+}
+.hero__stat-val {
+  font-family: var(--display); font-weight: 800;
+  font-size: 28px; color: #fff; letter-spacing: -.02em;
+}
+.hero__stat-val span { font-size: 14px; font-weight: 400; color: rgba(255,255,255,.35); }
+.hero__stat-lab {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: rgba(255,255,255,.35); margin-top: 4px;
+}
+
+/* Dashboard mockup */
+.hero__mock {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 16px; padding: 24px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.mock__bar {
+  display: flex; align-items: center; gap: 8px;
+  padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.mock__dot { width: 8px; height: 8px; border-radius: 50%; }
+.mock__title {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: rgba(255,255,255,.35); margin-left: 4px;
+}
+.mock__kpis { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.mock__kpi {
+  background: rgba(255,255,255,.04); border-radius: 10px; padding: 14px;
+}
+.mock__kpi-val {
+  font-family: var(--display); font-weight: 700;
+  font-size: 22px; color: #fff;
+}
+.mock__kpi-lab {
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: rgba(255,255,255,.35); margin-top: 2px;
+}
+.mock__kpi-trend { font-size: 10px; color: var(--lime); margin-top: 3px; }
+.mock__chart { background: rgba(255,255,255,.03); border-radius: 10px; padding: 16px; }
+
+/* ── Services aperçu ──────────────────────── */
+.services-preview { background: var(--fog); }
+.sp__grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 56px; }
+.sp__card {
+  background: #fff; border-radius: var(--radius);
+  border: 1px solid var(--line); padding: 28px;
+  transition: transform .2s, box-shadow .2s;
+}
+.sp__card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(16,42,67,.1); }
+.sp__icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  display: grid; place-items: center; margin-bottom: 20px;
+}
+.sp__name { font-family: var(--display); font-weight: 700; font-size: 18px; margin-bottom: 10px; }
+.sp__desc { font-size: 14px; color: var(--muted); line-height: 1.65; }
+.sp__tag {
+  display: inline-block; margin-top: 16px;
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: .1em; text-transform: uppercase;
+  border-radius: 20px; padding: 4px 12px;
+}
+
+/* ── Processus ────────────────────────────── */
+.process__steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; margin-top: 56px; }
+.process__step { position: relative; }
+.process__num {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: .14em; color: var(--lime);
+  margin-bottom: 14px;
+}
+.process__title { font-family: var(--display); font-weight: 700; font-size: 18px; margin-bottom: 10px; }
+.process__desc { font-size: 14px; color: var(--muted); line-height: 1.65; }
+.process__connector {
+  position: absolute; top: 6px; left: 100%; width: 32px;
+  height: 1px; background: var(--line);
+}
+
+/* ── CTA ──────────────────────────────────── */
+.cta-band {
+  background: var(--marine); padding: 80px 24px;
+  text-align: center;
+}
+.cta-band__title {
+  font-family: var(--display); font-weight: 800;
+  font-size: clamp(28px, 4vw, 48px); color: #fff;
+  letter-spacing: -.02em; margin-bottom: 16px;
+}
+.cta-band__title em { color: var(--coral); font-style: normal; }
+.cta-band__sub { font-size: 16px; color: rgba(255,255,255,.5); margin-bottom: 36px; }
+.cta-band__actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+@media (max-width: 900px) {
+  .hero__inner { grid-template-columns: 1fr; }
+  .hero__mock { display: none; }
+  .sp__grid, .process__steps { grid-template-columns: 1fr 1fr; }
+  .hero__stats { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .sp__grid, .process__steps { grid-template-columns: 1fr; }
+  .process__connector { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ─────────────────────────────────── -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <svg width="24" height="24" viewBox="0 0 32 32">
+        <path d="M27 16a11 11 0 1 0-6 9.8" fill="none" stroke="#102A43" stroke-width="3" stroke-linecap="round"/>
+        <path d="M22.5 16a6.5 6.5 0 1 0-3.4 5.7" fill="none" stroke="#FF6B4A" stroke-width="2.6" stroke-linecap="round"/>
+        <circle cx="24" cy="11.5" r="3.1" fill="#8FBF2E"/>
+      </svg>
+      <span class="nav__logo-name">Clart<span class="nav__logo-dot">i</span>s</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html" class="active">Accueil</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="a-propos.html">À propos</a></li>
+      <li><a href="contact.html" class="nav__cta">Nous contacter</a></li>
+    </ul>
+    <button class="nav__burger" aria-label="Menu" onclick="document.getElementById('mobile-menu').classList.toggle('open')">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <rect y="4" width="22" height="2" rx="1" fill="#102A43"/>
+        <rect y="10" width="22" height="2" rx="1" fill="#102A43"/>
+        <rect y="16" width="22" height="2" rx="1" fill="#102A43"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+<div class="nav__mobile" id="mobile-menu">
+  <a href="index.html">Accueil</a>
+  <a href="services.html">Services</a>
+  <a href="a-propos.html">À propos</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<!-- ── HERO ────────────────────────────────── -->
+<section class="hero">
+  <svg class="hero__bg" viewBox="0 0 1080 700" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <radialGradient id="g1" cx="75%" cy="20%" r="50%">
+        <stop offset="0%" stop-color="#FF6B4A" stop-opacity=".07"/>
+        <stop offset="100%" stop-color="#FF6B4A" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="g2" cx="10%" cy="85%" r="40%">
+        <stop offset="0%" stop-color="#8FBF2E" stop-opacity=".06"/>
+        <stop offset="100%" stop-color="#8FBF2E" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <rect width="1080" height="700" fill="url(#g1)"/>
+    <rect width="1080" height="700" fill="url(#g2)"/>
+    <g opacity=".035" transform="translate(700,60) scale(7)">
+      <path d="M27 16a11 11 0 1 0-6 9.8" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"/>
+      <path d="M22.5 16a6.5 6.5 0 1 0-3.4 5.7" fill="none" stroke="#FF6B4A" stroke-width="2.6" stroke-linecap="round"/>
+      <circle cx="24" cy="11.5" r="3.1" fill="#8FBF2E"/>
+    </g>
+    <polyline points="0,620 160,590 320,605 500,555 680,568 860,520 1080,500"
+      fill="none" stroke="rgba(255,107,74,.12)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="860" cy="520" r="5" fill="#8FBF2E" opacity=".3"/>
+  </svg>
+
+  <div class="hero__inner">
+    <div>
+      <div class="hero__eyebrow">Tableaux de bord · Rapports interactifs</div>
+      <h1 class="hero__title">Vos données,<br>enfin <em>claires.</em></h1>
+      <p class="hero__desc">Nous transformons vos données brutes en tableaux de bord Power BI interactifs. Voyez l'essentiel d'un coup d'œil et décidez en confiance.</p>
+      <div class="hero__actions">
+        <a href="contact.html" class="btn btn--coral">Démarrer un projet</a>
+        <a href="services.html" class="btn hero__btn-outline">Voir nos services</a>
+      </div>
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <div class="hero__stat-val">3–4<span> sem.</span></div>
+          <div class="hero__stat-lab">Livraison</div>
+        </div>
+        <div class="hero__stat">
+          <div class="hero__stat-val">Prix<span> fixe</span></div>
+          <div class="hero__stat-lab">Sans surprise</div>
+        </div>
+        <div class="hero__stat">
+          <div class="hero__stat-val">100<span>%</span></div>
+          <div class="hero__stat-lab">Sur mesure</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__mock">
+      <div class="mock__bar">
+        <span class="mock__dot" style="background:#8FBF2E"></span>
+        <span class="mock__dot" style="background:#FF6B4A; opacity:.5"></span>
+        <span class="mock__dot" style="background:rgba(255,255,255,.2)"></span>
+        <span class="mock__title">Tableau de bord · Performance</span>
+      </div>
+      <div class="mock__kpis">
+        <div class="mock__kpi">
+          <div class="mock__kpi-val">1,84 M$</div>
+          <div class="mock__kpi-lab">Revenus</div>
+          <div class="mock__kpi-trend">▲ 12,4 %</div>
+        </div>
+        <div class="mock__kpi">
+          <div class="mock__kpi-val">34 %</div>
+          <div class="mock__kpi-lab">Marge brute</div>
+          <div class="mock__kpi-trend">▲ 2,1 pts</div>
+        </div>
+        <div class="mock__kpi">
+          <div class="mock__kpi-val">18</div>
+          <div class="mock__kpi-lab">Projets actifs</div>
+          <div class="mock__kpi-trend">▲ 3</div>
+        </div>
+      </div>
+      <div class="mock__chart">
+        <svg width="100%" height="90" viewBox="0 0 300 90" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="cg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#102A43" stop-opacity=".4"/>
+              <stop offset="100%" stop-color="#102A43" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path d="M0,70 L50,60 100,65 150,40 200,48 250,22 300,15 L300,90 L0,90 Z" fill="url(#cg)"/>
+          <polyline points="0,70 50,60 100,65 150,40 200,48 250,22 300,15"
+            fill="none" stroke="#FF6B4A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <polyline points="0,80 50,76 100,70 150,68 200,62 250,58 300,50"
+            fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.5" stroke-dasharray="4 6" stroke-linecap="round"/>
+          <circle cx="250" cy="22" r="4" fill="#8FBF2E"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES APERÇU ──────────────────────── -->
+<section class="section services-preview">
+  <div class="section__inner">
+    <div class="eyebrow">Ce qu'on fait</div>
+    <h2 style="font-family:var(--display);font-weight:800;font-size:clamp(28px,3.5vw,44px);margin-top:14px;letter-spacing:-.01em;">
+      Des données à la décision,<br>sans détour.
+    </h2>
+    <div class="sp__grid">
+      <div class="sp__card">
+        <div class="sp__icon" style="background:rgba(143,191,46,.1)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <rect x="3" y="12" width="4" height="9" rx="1.5" fill="#8FBF2E"/>
+            <rect x="10" y="7" width="4" height="14" rx="1.5" fill="#8FBF2E" opacity=".7"/>
+            <rect x="17" y="3" width="4" height="18" rx="1.5" fill="#8FBF2E" opacity=".45"/>
+          </svg>
+        </div>
+        <div class="sp__name">Tableaux de bord Power BI</div>
+        <div class="sp__desc">Connectés à vos données, sur mesure, livrés en 3 à 4 semaines. Vous pilotez, on construit.</div>
+        <span class="sp__tag" style="background:rgba(143,191,46,.1);color:#5A8B1E">Sur mesure</span>
+      </div>
+      <div class="sp__card">
+        <div class="sp__icon" style="background:rgba(255,107,74,.1)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M3 17 L8 11 L13 13 L20 6" stroke="#FF6B4A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="20" cy="6" r="2.5" fill="#FF6B4A"/>
+          </svg>
+        </div>
+        <div class="sp__name">Rapports interactifs</div>
+        <div class="sp__desc">Pour votre équipe, vos clients ou vos investisseurs. Clairs, exportables, prêts à présenter.</div>
+        <span class="sp__tag" style="background:rgba(255,107,74,.1);color:#C24A2A">Multi-format</span>
+      </div>
+      <div class="sp__card">
+        <div class="sp__icon" style="background:rgba(16,42,67,.07)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="8" stroke="#102A43" stroke-width="2" opacity=".4"/>
+            <circle cx="12" cy="12" r="4.5" stroke="#102A43" stroke-width="2" opacity=".7"/>
+            <circle cx="12" cy="12" r="2" fill="#8FBF2E"/>
+          </svg>
+        </div>
+        <div class="sp__name">Analyse de performance</div>
+        <div class="sp__desc">On connecte vos sources, nettoie vos données et vous livre l'essentiel pour décider vite.</div>
+        <span class="sp__tag" style="background:rgba(16,42,67,.07);color:#5A6B7E">Décisionnel</span>
+      </div>
+    </div>
+    <div style="margin-top:40px;text-align:center">
+      <a href="services.html" class="btn btn--outline">Voir tous les services →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROCESSUS ────────────────────────────── -->
+<section class="section">
+  <div class="section__inner">
+    <div class="eyebrow">Comment ça marche</div>
+    <h2 style="font-family:var(--display);font-weight:800;font-size:clamp(28px,3.5vw,44px);margin-top:14px;letter-spacing:-.01em;">
+      Simple. Rapide. Livré.
+    </h2>
+    <div class="process__steps">
+      <div class="process__step">
+        <div class="process__num">01</div>
+        <div class="process__title">Découverte</div>
+        <div class="process__desc">On comprend vos données, vos questions et ce qui compte vraiment pour vous.</div>
+        <div class="process__connector"></div>
+      </div>
+      <div class="process__step">
+        <div class="process__num">02</div>
+        <div class="process__title">Construction</div>
+        <div class="process__desc">On connecte vos sources et on construit le tableau de bord avec vous, itération par itération.</div>
+        <div class="process__connector"></div>
+      </div>
+      <div class="process__step">
+        <div class="process__num">03</div>
+        <div class="process__title">Livraison</div>
+        <div class="process__desc">Vous recevez un outil clé en main, avec la formation pour l'utiliser en toute autonomie.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ──────────────────────────────────── -->
+<div class="cta-band">
+  <div class="section__inner" style="text-align:center">
+    <h2 class="cta-band__title">Prêt à voir vos données <em>autrement?</em></h2>
+    <p class="cta-band__sub">La première rencontre est gratuite. Pas de pitch — juste une conversation.</p>
+    <div class="cta-band__actions">
+      <a href="contact.html" class="btn btn--coral">Prendre contact</a>
+      <a href="a-propos.html" class="btn hero__btn-outline" style="border-color:rgba(255,255,255,.3);color:#fff">En savoir plus</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ───────────────────────────────── -->
+<footer>
+  <div class="footer__inner">
+    <a href="index.html" class="footer__logo">
+      <svg width="20" height="20" viewBox="0 0 32 32">
+        <path d="M27 16a11 11 0 1 0-6 9.8" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="3" stroke-linecap="round"/>
+        <path d="M22.5 16a6.5 6.5 0 1 0-3.4 5.7" fill="none" stroke="#FF6B4A" stroke-width="2.6" stroke-linecap="round"/>
+        <circle cx="24" cy="11.5" r="3.1" fill="#8FBF2E"/>
+      </svg>
+      <span class="footer__logo-name">Clartis</span>
+    </a>
+    <ul class="footer__links">
+      <li><a href="services.html">Services</a></li>
+      <li><a href="a-propos.html">À propos</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <span class="footer__copy">© 2026 Clartis Analytique · Québec, Canada</span>
+  </div>
+</footer>
+
+</body>
+</html>
