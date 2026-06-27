@@ -29,23 +29,6 @@
 html{scroll-behavior:smooth}
 body{font-family:var(--body);background:var(--bg);color:var(--fg);line-height:1.6;transition:background .3s,color .3s;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 
-/* ══ INTRO ═══════════════════════════════ */
-#intro{position:fixed;inset:0;z-index:1000;background:#0A1E30;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:48px;transition:opacity .7s,visibility .7s}
-#intro.gone{opacity:0;visibility:hidden;pointer-events:none}
-.intro__mark{animation:pop .8s .1s cubic-bezier(.34,1.56,.64,1) both}
-.intro__name{font-family:var(--display);font-weight:800;font-size:52px;color:#fff;letter-spacing:-.02em;animation:up .7s .3s ease both}
-.intro__name .gr{color:#8FBF2E}
-.intro__sub{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.35);animation:up .7s .4s ease both}
-.intro__msg{font-size:17px;color:rgba(255,255,255,.55);animation:up .7s .55s ease both}
-.intro__btns{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;animation:up .7s .7s ease both}
-.intro__btn{display:flex;flex-direction:column;align-items:center;gap:8px;padding:24px 40px;border-radius:18px;cursor:pointer;border:1.5px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);transition:all .25s;min-width:190px}
-.intro__btn:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.4);transform:translateY(-4px)}
-.intro__btn.coral{border-color:rgba(255,107,74,.5);background:rgba(255,107,74,.1)}
-.intro__btn.coral:hover{background:rgba(255,107,74,.22)}
-.intro__btn-ico{font-size:32px}
-.intro__btn-lbl{font-family:var(--display);font-weight:700;font-size:15px;color:#fff}
-.intro__btn-sub{font-size:12px;color:rgba(255,255,255,.4)}
-
 /* ══ LOGIN MODAL ═════════════════════════ */
 #modal{position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .3s}
 #modal.open{opacity:1;visibility:visible}
@@ -87,8 +70,8 @@ body{font-family:var(--body);background:var(--bg);color:var(--fg);line-height:1.
 .hero-bg-logo{position:absolute;right:-3%;top:50%;transform:translateY(-50%);pointer-events:none;opacity:.04;z-index:0}
 .hero-bg-graph{position:absolute;bottom:0;left:0;right:0;pointer-events:none;z-index:0}
 .hero-inner{max-width:var(--max-w);margin:0 auto;width:100%;position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-.hero-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--coral);display:flex;align-items:center;gap:10px;margin-bottom:20px;animation:up .7s ease both}
-.hero-eyebrow::before{content:"";display:block;width:24px;height:1.5px;background:var(--coral);border-radius:2px}
+.hero-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--lime);display:flex;align-items:center;gap:10px;margin-bottom:20px;animation:up .7s ease both}
+.hero-eyebrow::before{content:"";display:block;width:24px;height:1.5px;background:var(--lime);border-radius:2px}
 .hero-title{font-family:var(--display);font-weight:800;font-size:clamp(40px,5.5vw,70px);line-height:.95;letter-spacing:-.025em;color:var(--fg);margin-bottom:22px;animation:up .7s .1s ease both}
 .hero-title em{color:var(--coral);font-style:normal}
 .hero-desc{font-size:16px;color:var(--fg2);line-height:1.72;max-width:44ch;margin-bottom:36px;animation:up .7s .2s ease both}
@@ -98,7 +81,7 @@ body{font-family:var(--body);background:var(--bg);color:var(--fg);line-height:1.
 .btn-a:active{transform:translateY(0)}
 .btn-b{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:transparent;color:var(--fg);border-radius:999px;font-weight:600;font-size:14px;text-decoration:none;border:1.5px solid var(--fg);transition:all .2s}
 .btn-b:hover{background:var(--fg);color:var(--bg);transform:translateY(-2px)}
-.hero-stats{display:flex;gap:0;background:var(--card);border:1px solid var(--card-b);border-radius:14px;overflow:hidden;animation:up .7s .4s ease both}
+.hero-stats{display:flex;gap:0;background:var(--card);border:1px solid var(--card-b);border-radius:14px;overflow:hidden;animation:up .7s .4s ease both;align-self:flex-start;width:100%}
 .h-stat{flex:1;padding:18px 20px;border-right:1px solid var(--card-b)}
 .h-stat:last-child{border-right:none}
 .h-stat-val{font-family:var(--display);font-weight:800;font-size:19px;color:var(--fg);letter-spacing:-.01em}
@@ -194,16 +177,6 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:36px 24px;
 </head>
 <body>
 
-<!-- INTRO -->
-<div id="intro">
-  <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
-    <div class="intro__mark">
-      <svg width="72" height="72" viewBox="0 0 32 32">
-        <path d="M27 16a11 11 0 1 0-6 9.8" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"/>
-        <path d="M22.5 16a6.5 6.5 0 1 0-3.4 5.7" fill="none" stroke="#FF6B4A" stroke-width="2.6" stroke-linecap="round"/>
-        <circle cx="24" cy="11.5" r="3.1" fill="#8FBF2E"/>
-      </svg>
-    </div>
     <div class="intro__name">Clart<span class="gr">i</span>s</div>
     <div class="intro__sub">Analytique</div>
   </div>
@@ -253,7 +226,6 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:36px 24px;
       <li><a href="services.html" data-fr="Services" data-en="Services">Services</a></li>
       <li><a href="a-propos.html" data-fr="À propos" data-en="About">À propos</a></li>
       <li><a href="#" data-fr="Réalisations" data-en="Portfolio">Réalisations</a></li>
-      <li><a href="services.html" data-fr="Tarifs" data-en="Pricing">Tarifs</a></li>
       <li><a href="contact.html" data-fr="Nous contacter" data-en="Contact">Nous contacter</a></li>
     </ul>
     <div class="nav-ctrl">
@@ -280,7 +252,6 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:36px 24px;
   <a href="services.html" data-fr="Services" data-en="Services">Services</a>
   <a href="a-propos.html" data-fr="À propos" data-en="About">À propos</a>
   <a href="#" data-fr="Réalisations" data-en="Portfolio">Réalisations</a>
-  <a href="services.html" data-fr="Tarifs" data-en="Pricing">Tarifs</a>
   <a href="contact.html" data-fr="Nous contacter" data-en="Contact">Nous contacter</a>
 </div>
 
@@ -294,7 +265,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:36px 24px;
     </svg>
   </div>
   <svg class="hero-bg-graph" height="110" viewBox="0 0 1200 110" preserveAspectRatio="none" style="opacity:.05">
-    <polyline points="0,88 150,72 300,78 450,48 600,58 750,32 900,38 1050,18 1200,12" fill="none" stroke="#FF6B4A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <polyline points="0,95 120,78 240,84 380,54 520,64 660,38 800,44 940,22 1080,26 1200,8" fill="none" stroke="#FF6B4A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
   <div class="hero-inner">
     <div>
@@ -307,7 +278,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:36px 24px;
       </div>
       <div class="hero-stats">
         <div class="h-stat"><div class="h-stat-val">1–3<span data-fr=" sem." data-en=" wks."> sem.</span></div><div class="h-stat-lab" data-fr="Selon le projet" data-en="By project">Selon le projet</div></div>
-        <div class="h-stat"><div class="h-stat-val" data-fr="Prix fixe" data-en="Fixed price">Prix fixe</div><div class="h-stat-lab" data-fr="Sans surprise" data-en="No surprises">Sans surprise</div></div>
+        <div class="h-stat"><div class="h-stat-val" data-fr="Prix variable" data-en="Variable price">Prix variable</div><div class="h-stat-lab" data-fr="selon vos besoins" data-en="based on your needs">selon vos besoins</div></div>
         <div class="h-stat"><div class="h-stat-val">100<span>%</span></div><div class="h-stat-lab" data-fr="Sur mesure" data-en="Custom made">Sur mesure</div></div>
       </div>
     </div>
@@ -399,7 +370,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:36px 24px;
       <svg width="19" height="19" viewBox="0 0 32 32"><path d="M27 16a11 11 0 1 0-6 9.8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M22.5 16a6.5 6.5 0 1 0-3.4 5.7" fill="none" stroke="#FF6B4A" stroke-width="2.6" stroke-linecap="round"/><circle cx="24" cy="11.5" r="3.1" fill="#8FBF2E"/></svg>
       <span class="foot-logo-name">Clartis</span>
     </a>
-    <div class="foot-socials">
+    <div class="foot-socials"><span style="font-size:13px;color:var(--fg2);font-weight:500;" data-fr="Retrouvez-nous ici" data-en="Find us here">Retrouvez-nous ici</span>
       <a href="https://linkedin.com/company/clartis-analytique" target="_blank" rel="noopener" class="foot-social">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
         LinkedIn
@@ -410,12 +381,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:36px 24px;
 </footer>
 
 <script>
-/* INTRO */
-function enterSite(type){
-  document.getElementById('intro').classList.add('gone');
-  if(type==='client') setTimeout(openModal,500);
-  else setTimeout(initChart,600);
-}
+
 
 /* MODAL */
 function openModal(){document.getElementById('modal').classList.add('open')}
