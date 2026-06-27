@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>À propos — Clartis Analytique</title>
+<meta name="description" content="Clartis Analytique — qui on est, ce qu'on fait et pourquoi on le fait.">
+<link rel="stylesheet" href="style.css">
+<style>
+.page-hero { background:var(--marine); padding: 80px 24px 64px; }
+.page-hero h1 {
+  font-family: var(--display); font-weight: 800;
+  font-size: clamp(36px, 5vw, 64px); letter-spacing: -.02em;
+  color: #fff; margin-top: 14px; max-width: 20ch;
+}
+.page-hero p { font-size: 17px; color: rgba(255,255,255,.55); max-width: 48ch; line-height: 1.7; margin-top: 16px; }
+
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 64px; align-items: center;
+}
+.about-grid__visual {
+  background: var(--fog); border-radius: 16px;
+  border: 1px solid var(--line); padding: 40px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.about-stat {
+  display: flex; align-items: center; gap: 16px;
+  padding: 18px; background: #fff; border-radius: 10px;
+  border: 1px solid var(--line);
+}
+.about-stat__dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.about-stat__val { font-family: var(--display); font-weight: 700; font-size: 22px; }
+.about-stat__lab { font-size: 13px; color: var(--muted); }
+
+.about-text h2 {
+  font-family: var(--display); font-weight: 800;
+  font-size: clamp(26px, 3vw, 38px); letter-spacing: -.01em;
+  margin-bottom: 20px;
+}
+.about-text p { font-size: 15px; color: var(--muted); line-height: 1.75; margin-bottom: 16px; }
+
+.values-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 48px; }
+.value-card { padding: 28px; border-radius: 14px; border: 1px solid var(--line); }
+.value-card__icon { font-size: 28px; margin-bottom: 14px; }
+.value-card__title { font-family: var(--display); font-weight: 700; font-size: 17px; margin-bottom: 8px; }
+.value-card__desc { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+@media (max-width: 860px) {
+  .about-grid { grid-template-columns: 1fr; }
+  .values-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) { .values-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <svg width="24" height="24" viewBox="0 0 32 32">
+        <path d="M27 16a11 11 0 1 0-6 9.8" fill="none" stroke="#102A43" stroke-width="3" stroke-linecap="round"/>
+        <path d="M22.5 16a6.5 6.5 0 1 0-3.4 5.7" fill="none" stroke="#FF6B4A" stroke-width="2.6" stroke-linecap="round"/>
+        <circle cx="24" cy="11.5" r="3.1" fill="#8FBF2E"/>
+      </svg>
+      <span class="nav__logo-name">Clart<span class="nav__logo-dot">i</span>s</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="a-propos.html" class="active">À propos</a></li>
+      <li><a href="contact.html" class="nav__cta">Nous contacter</a></li>
+    </ul>
+    <button class="nav__burger" aria-label="Menu" onclick="document.getElementById('mobile-menu').classList.toggle('open')">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <rect y="4" width="22" height="2" rx="1" fill="#102A43"/>
+        <rect y="10" width="22" height="2" rx="1" fill="#102A43"/>
+        <rect y="16" width="22" height="2" rx="1" fill="#102A43"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+<div class="nav__mobile" id="mobile-menu">
+  <a href="index.html">Accueil</a>
+  <a href="services.html">Services</a>
+  <a href="a-propos.html">À propos</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<div class="page-hero">
+  <div class="section__inner">
+    <div class="eyebrow" style="color:var(--lime)">À propos</div>
+    <h1>On croit que vos données méritent mieux qu'un fichier Excel.</h1>
+    <p>Clartis est une firme analytique québécoise fondée pour aider les entreprises à voir clairement dans leurs données — et à agir en conséquence.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="section__inner">
+    <div class="about-grid">
+      <div class="about-text">
+        <h2>Pourquoi Clartis existe.</h2>
+        <p>Trop d'entreprises accumulent des données précieuses sans jamais pouvoir en tirer une vision claire. Les chiffres vivent dans dix fichiers différents, les réunions tournent en rond, et les décisions importantes se prennent à l'intuition.</p>
+        <p>On a fondé Clartis pour changer ça. Notre mission : transformer vos données brutes en un tableau de bord que vous comprenez au premier coup d'œil — et qui vous permet de décider vite, bien, et avec confiance.</p>
+        <p>On ne vend pas un logiciel. On construit un outil sur mesure pour votre entreprise, avec vos données, pour vos questions.</p>
+        <a href="contact.html" class="btn btn--primary" style="margin-top:16px">Travaillons ensemble</a>
+      </div>
+      <div class="about-grid__visual">
+        <div class="about-stat">
+          <span class="about-stat__dot" style="background:var(--lime)"></span>
+          <div>
+            <div class="about-stat__val">3–4 semaines</div>
+            <div class="about-stat__lab">pour livrer un tableau de bord complet</div>
+          </div>
+        </div>
+        <div class="about-stat">
+          <span class="about-stat__dot" style="background:var(--coral)"></span>
+          <div>
+            <div class="about-stat__val">Prix fixe</div>
+            <div class="about-stat__lab">vous savez exactement ce que vous payez</div>
+          </div>
+        </div>
+        <div class="about-stat">
+          <span class="about-stat__dot" style="background:var(--marine)"></span>
+          <div>
+            <div class="about-stat__val">100% sur mesure</div>
+            <div class="about-stat__lab">aucun gabarit générique, que du sur mesure</div>
+          </div>
+        </div>
+        <div style="margin-top:8px;padding:18px;background:var(--marine);border-radius:10px">
+          <div style="font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:8px">Notre promesse</div>
+          <div style="font-family:var(--display);font-weight:700;font-size:17px;color:#fff;line-height:1.3">« L'essentiel, d'un seul coup d'œil. »</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--fog);border-top:1px solid var(--line)">
+  <div class="section__inner">
+    <div class="eyebrow">Ce qu'on défend</div>
+    <h2 style="font-family:var(--display);font-weight:800;font-size:clamp(28px,3.5vw,44px);margin-top:14px;letter-spacing:-.01em;">
+      Nos valeurs, concrètement.
+    </h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-card__icon">🎯</div>
+        <div class="value-card__title">L'essentiel d'abord</div>
+        <div class="value-card__desc">On ne construit pas pour impressionner. On construit pour que vous compreniez vos chiffres du premier coup et puissiez agir.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-card__icon">💬</div>
+        <div class="value-card__title">Transparence totale</div>
+        <div class="value-card__desc">Prix fixes, délais clairs, retours honnêtes. On vous dit ce qu'on peut faire — et ce qu'on ne peut pas.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-card__icon">⚡</div>
+        <div class="value-card__title">Rapidité sans compromis</div>
+        <div class="value-card__desc">En 3 à 4 semaines vous avez un outil prêt. On va vite parce qu'on travaille de façon structurée, pas à la sauvette.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <div class="section__inner" style="text-align:center">
+    <h2 class="cta-band__title">Parlons de vos <em>données.</em></h2>
+    <p class="cta-band__sub">La première rencontre est gratuite et sans engagement.</p>
+    <div class="cta-band__actions">
+      <a href="contact.html" class="btn btn--coral">Prendre contact</a>
+      <a href="services.html" class="btn hero__btn-outline" style="border-color:rgba(255,255,255,.3);color:#fff">Voir nos services</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer__inner">
+    <a href="index.html" class="footer__logo">
+      <svg width="20" height="20" viewBox="0 0 32 32">
+        <path d="M27 16a11 11 0 1 0-6 9.8" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="3" stroke-linecap="round"/>
+        <path d="M22.5 16a6.5 6.5 0 1 0-3.4 5.7" fill="none" stroke="#FF6B4A" stroke-width="2.6" stroke-linecap="round"/>
+        <circle cx="24" cy="11.5" r="3.1" fill="#8FBF2E"/>
+      </svg>
+      <span class="footer__logo-name">Clartis</span>
+    </a>
+    <ul class="footer__links">
+      <li><a href="services.html">Services</a></li>
+      <li><a href="a-propos.html">À propos</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <span class="footer__copy">© 2026 Clartis Analytique · Québec, Canada</span>
+  </div>
+</footer>
+</body>
+</html>
