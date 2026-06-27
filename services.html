@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Services — Clartis Analytique</title>
+<meta name="description" content="Tableaux de bord Power BI, rapports interactifs et analyse de performance. Prix fixe, livraison en 3 à 4 semaines.">
+<link rel="stylesheet" href="style.css">
+<style>
+.page-hero {
+  background: var(--fog); padding: 80px 24px 64px;
+  border-bottom: 1px solid var(--line);
+}
+.page-hero__inner { max-width: var(--max-w); margin: 0 auto; }
+.page-hero h1 {
+  font-family: var(--display); font-weight: 800;
+  font-size: clamp(36px, 5vw, 64px); letter-spacing: -.02em;
+  margin-top: 14px; max-width: 18ch;
+}
+.page-hero p {
+  font-size: 17px; color: var(--muted); max-width: 48ch;
+  line-height: 1.7; margin-top: 16px;
+}
+
+.svc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 56px; }
+.svc-card {
+  border: 1px solid var(--line); border-radius: 14px;
+  padding: 36px; display: flex; flex-direction: column; gap: 14px;
+  transition: box-shadow .2s, transform .2s;
+}
+.svc-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(16,42,67,.1); }
+.svc-card--featured {
+  background: var(--marine); border-color: var(--marine);
+  grid-column: 1 / -1;
+  flex-direction: row; align-items: flex-start; gap: 48px;
+}
+.svc-card__icon {
+  width: 52px; height: 52px; border-radius: 12px;
+  display: grid; place-items: center; flex-shrink: 0;
+}
+.svc-card__title {
+  font-family: var(--display); font-weight: 800;
+  font-size: 22px; letter-spacing: -.01em;
+}
+.svc-card__desc { font-size: 15px; color: var(--muted); line-height: 1.7; }
+.svc-card--featured .svc-card__title { color: #fff; }
+.svc-card--featured .svc-card__desc { color: rgba(255,255,255,.55); }
+.svc-card__list {
+  list-style: none; display: flex; flex-direction: column; gap: 8px;
+  margin-top: 6px;
+}
+.svc-card__list li {
+  font-size: 14px; color: var(--muted);
+  padding-left: 20px; position: relative;
+}
+.svc-card__list li::before {
+  content: ""; position: absolute; left: 0; top: 7px;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--lime);
+}
+.svc-card--featured .svc-card__list li { color: rgba(255,255,255,.5); }
+.svc-card__tag {
+  align-self: flex-start; font-family: var(--mono);
+  font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+  border-radius: 20px; padding: 5px 12px; margin-top: auto;
+}
+
+.pricing { background: var(--fog); }
+.pricing__grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 48px; }
+.pricing__card {
+  background: #fff; border: 1px solid var(--line);
+  border-radius: 14px; padding: 28px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.pricing__card--main { border-color: var(--marine); border-width: 2px; }
+.pricing__label {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
+}
+.pricing__name { font-family: var(--display); font-weight: 700; font-size: 20px; margin-top: 4px; }
+.pricing__price {
+  font-family: var(--display); font-weight: 800; font-size: 32px;
+  letter-spacing: -.02em; color: var(--marine); margin: 8px 0;
+}
+.pricing__price span { font-size: 14px; font-weight: 400; color: var(--muted); }
+.pricing__desc { font-size: 14px; color: var(--muted); line-height: 1.65; }
+.pricing__divider { height: 1px; background: var(--line); margin: 14px 0; }
+.pricing__features { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.pricing__features li { font-size: 13.5px; padding-left: 18px; position: relative; }
+.pricing__features li::before {
+  content: "✓"; position: absolute; left: 0; color: var(--lime); font-weight: 700;
+}
+.pricing__cta { margin-top: auto; padding-top: 20px; }
+
+@media (max-width: 860px) {
+  .svc-card--featured { flex-direction: column; gap: 24px; grid-column: auto; }
+  .svc-grid, .pricing__grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <svg width="24" height="24" viewBox="0 0 32 32">
+        <path d="M27 16a11 11 0 1 0-6 9.8" fill="none" stroke="#102A43" stroke-width="3" stroke-linecap="round"/>
+        <path d="M22.5 16a6.5 6.5 0 1 0-3.4 5.7" fill="none" stroke="#FF6B4A" stroke-width="2.6" stroke-linecap="round"/>
+        <circle cx="24" cy="11.5" r="3.1" fill="#8FBF2E"/>
+      </svg>
+      <span class="nav__logo-name">Clart<span class="nav__logo-dot">i</span>s</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="services.html" class="active">Services</a></li>
+      <li><a href="a-propos.html">À propos</a></li>
+      <li><a href="contact.html" class="nav__cta">Nous contacter</a></li>
+    </ul>
+    <button class="nav__burger" aria-label="Menu" onclick="document.getElementById('mobile-menu').classList.toggle('open')">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <rect y="4" width="22" height="2" rx="1" fill="#102A43"/>
+        <rect y="10" width="22" height="2" rx="1" fill="#102A43"/>
+        <rect y="16" width="22" height="2" rx="1" fill="#102A43"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+<div class="nav__mobile" id="mobile-menu">
+  <a href="index.html">Accueil</a>
+  <a href="services.html">Services</a>
+  <a href="a-propos.html">À propos</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero__inner">
+    <div class="eyebrow">Services</div>
+    <h1>Tout ce qu'on fait pour vous.</h1>
+    <p>Des livrables clairs, à prix fixe, pour que vous n'ayez jamais de mauvaise surprise — juste des résultats.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="section__inner">
+    <div class="svc-grid">
+
+      <div class="svc-card svc-card--featured">
+        <div>
+          <div class="svc-card__icon" style="background:rgba(255,107,74,.15)">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="12" width="4" height="9" rx="1.5" fill="#FF6B4A"/>
+              <rect x="10" y="7" width="4" height="14" rx="1.5" fill="#FF6B4A" opacity=".7"/>
+              <rect x="17" y="3" width="4" height="18" rx="1.5" fill="#8FBF2E"/>
+            </svg>
+          </div>
+        </div>
+        <div>
+          <div class="svc-card__title">Tableau de bord Power BI sur mesure</div>
+          <div class="svc-card__desc" style="max-width:52ch">Notre service phare. On connecte vos sources de données, on construit les vues qui comptent pour vous, et on vous livre un outil que vous maîtrisez entièrement — en 3 à 4 semaines, à prix fixe.</div>
+          <ul class="svc-card__list" style="margin-top:16px">
+            <li>Connexion de vos sources (Excel, ERP, CRM, API, etc.)</li>
+            <li>Design des indicateurs clés et des vues sur mesure</li>
+            <li>Mises à jour automatiques des données</li>
+            <li>Formation à l'utilisation incluse</li>
+            <li>Option d'entretien mensuel disponible</li>
+          </ul>
+          <a href="contact.html" class="btn btn--coral" style="margin-top:28px;align-self:flex-start">Démarrer un projet</a>
+        </div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-card__icon" style="background:rgba(143,191,46,.1)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M3 17 L8 11 L13 13 L20 6" stroke="#8FBF2E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="20" cy="6" r="2.5" fill="#8FBF2E"/>
+          </svg>
+        </div>
+        <div class="svc-card__title">Rapport interactif</div>
+        <div class="svc-card__desc">Pour présenter vos résultats à votre équipe, vos investisseurs ou vos clients. Clair, visuel, prêt à partager.</div>
+        <ul class="svc-card__list">
+          <li>Mise en page professionnelle</li>
+          <li>Exportable en PDF ou partage en ligne</li>
+          <li>Commentaires et annotations intégrés</li>
+        </ul>
+        <span class="svc-card__tag" style="background:rgba(143,191,46,.1);color:#5A8B1E">Présentation · Investisseurs</span>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-card__icon" style="background:rgba(16,42,67,.07)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="8" stroke="#102A43" stroke-width="2" opacity=".4"/>
+            <circle cx="12" cy="12" r="4.5" stroke="#102A43" stroke-width="2" opacity=".7"/>
+            <circle cx="12" cy="12" r="2" fill="#8FBF2E"/>
+          </svg>
+        </div>
+        <div class="svc-card__title">Analyse de performance</div>
+        <div class="svc-card__desc">On plonge dans vos données, on identifie ce qui freine ou propulse vos résultats, et on vous remet un diagnostic actionnable.</div>
+        <ul class="svc-card__list">
+          <li>Audit de vos données existantes</li>
+          <li>Identification des leviers de performance</li>
+          <li>Rapport de recommandations</li>
+        </ul>
+        <span class="svc-card__tag" style="background:rgba(16,42,67,.07);color:#5A6B7E">Diagnostic · Stratégie</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section pricing">
+  <div class="section__inner">
+    <div class="eyebrow">Tarification</div>
+    <h2 style="font-family:var(--display);font-weight:800;font-size:clamp(28px,3.5vw,44px);margin-top:14px;letter-spacing:-.01em;">
+      Prix fixes. Zéro surprise.
+    </h2>
+    <p style="font-size:16px;color:var(--muted);margin-top:12px;max-width:46ch">Vous savez exactement ce que vous payez avant de commencer. Pas d'heures supplémentaires, pas de frais cachés.</p>
+    <div class="pricing__grid">
+      <div class="pricing__card">
+        <div class="pricing__label">Essentiel</div>
+        <div class="pricing__name">Rapport interactif</div>
+        <div class="pricing__price">Sur devis<span></span></div>
+        <div class="pricing__desc">Pour un livrable ponctuel — rapport, présentation ou analyse ciblée.</div>
+        <div class="pricing__divider"></div>
+        <ul class="pricing__features">
+          <li>1 source de données</li>
+          <li>Jusqu'à 5 pages de rapport</li>
+          <li>Livraison en 1–2 semaines</li>
+          <li>1 révision incluse</li>
+        </ul>
+        <div class="pricing__cta"><a href="contact.html" class="btn btn--outline" style="width:100%;justify-content:center">Demander un devis</a></div>
+      </div>
+      <div class="pricing__card pricing__card--main">
+        <div class="pricing__label" style="color:var(--lime)">Le plus populaire</div>
+        <div class="pricing__name">Tableau de bord</div>
+        <div class="pricing__price">Sur devis<span></span></div>
+        <div class="pricing__desc">Le projet complet — de la connexion des données à la prise en main autonome.</div>
+        <div class="pricing__divider"></div>
+        <ul class="pricing__features">
+          <li>Sources multiples connectées</li>
+          <li>Tableau de bord Power BI complet</li>
+          <li>Livraison en 3–4 semaines</li>
+          <li>Formation incluse</li>
+          <li>Révisions illimitées</li>
+        </ul>
+        <div class="pricing__cta"><a href="contact.html" class="btn btn--primary" style="width:100%;justify-content:center">Démarrer</a></div>
+      </div>
+      <div class="pricing__card">
+        <div class="pricing__label">Continu</div>
+        <div class="pricing__name">Entretien mensuel</div>
+        <div class="pricing__price">Sur devis<span> /mois</span></div>
+        <div class="pricing__desc">Après la livraison — on maintient, met à jour et fait évoluer votre tableau de bord.</div>
+        <div class="pricing__divider"></div>
+        <ul class="pricing__features">
+          <li>Mises à jour régulières</li>
+          <li>Nouvelles vues sur demande</li>
+          <li>Support prioritaire</li>
+          <li>Rapport mensuel d'évolution</li>
+        </ul>
+        <div class="pricing__cta"><a href="contact.html" class="btn btn--outline" style="width:100%;justify-content:center">En savoir plus</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <div class="section__inner" style="text-align:center">
+    <h2 class="cta-band__title">Votre projet commence par<br><em>une conversation.</em></h2>
+    <p class="cta-band__sub">La première rencontre est gratuite. On vous dit honnêtement si on peut vous aider.</p>
+    <div class="cta-band__actions">
+      <a href="contact.html" class="btn btn--coral">Prendre contact</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer__inner">
+    <a href="index.html" class="footer__logo">
+      <svg width="20" height="20" viewBox="0 0 32 32">
+        <path d="M27 16a11 11 0 1 0-6 9.8" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="3" stroke-linecap="round"/>
+        <path d="M22.5 16a6.5 6.5 0 1 0-3.4 5.7" fill="none" stroke="#FF6B4A" stroke-width="2.6" stroke-linecap="round"/>
+        <circle cx="24" cy="11.5" r="3.1" fill="#8FBF2E"/>
+      </svg>
+      <span class="footer__logo-name">Clartis</span>
+    </a>
+    <ul class="footer__links">
+      <li><a href="services.html">Services</a></li>
+      <li><a href="a-propos.html">À propos</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <span class="footer__copy">© 2026 Clartis Analytique · Québec, Canada</span>
+  </div>
+</footer>
+</body>
+</html>
