@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — Clartis Analytique</title>
+<meta name="description" content="Contactez Clartis Analytique. La première rencontre est gratuite.">
+<link rel="stylesheet" href="style.css">
+<style>
+.page-hero { background: var(--fog); padding: 80px 24px 64px; border-bottom: 1px solid var(--line); }
+.page-hero h1 {
+  font-family: var(--display); font-weight: 800;
+  font-size: clamp(36px, 5vw, 64px); letter-spacing: -.02em;
+  margin-top: 14px; max-width: 20ch;
+}
+.page-hero p { font-size: 17px; color: var(--muted); max-width: 48ch; line-height: 1.7; margin-top: 16px; }
+
+.contact-grid {
+  display: grid; grid-template-columns: 1fr 1.4fr;
+  gap: 64px; align-items: flex-start;
+}
+.contact-info { display: flex; flex-direction: column; gap: 32px; }
+.contact-info h2 {
+  font-family: var(--display); font-weight: 800;
+  font-size: 28px; letter-spacing: -.01em;
+}
+.contact-info p { font-size: 15px; color: var(--muted); line-height: 1.75; }
+
+.contact-item {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 20px; background: var(--fog);
+  border-radius: 12px; border: 1px solid var(--line);
+}
+.contact-item__icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  display: grid; place-items: center; flex-shrink: 0;
+}
+.contact-item__label {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+  margin-bottom: 4px;
+}
+.contact-item__value { font-size: 15px; font-weight: 600; color: var(--marine); }
+.contact-item__sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+/* Formulaire */
+.form-card {
+  background: #fff; border: 1px solid var(--line);
+  border-radius: 16px; padding: 40px;
+}
+.form-card h3 {
+  font-family: var(--display); font-weight: 700;
+  font-size: 22px; margin-bottom: 24px;
+}
+.form-group { margin-bottom: 20px; }
+.form-group label {
+  display: block; font-size: 13px; font-weight: 600;
+  margin-bottom: 7px; color: var(--marine);
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%; padding: 12px 16px;
+  border: 1.5px solid var(--line); border-radius: var(--radius);
+  font-family: var(--body); font-size: 14px; color: var(--marine);
+  background: #fff; outline: none;
+  transition: border-color .2s;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus { border-color: var(--marine); }
+.form-group textarea { resize: vertical; min-height: 120px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-submit {
+  width: 100%; padding: 14px;
+  background: var(--marine); color: #fff;
+  border: none; border-radius: 999px;
+  font-family: var(--body); font-size: 15px; font-weight: 600;
+  cursor: pointer; transition: opacity .2s;
+}
+.form-submit:hover { opacity: .85; }
+.form-note {
+  font-size: 12px; color: var(--muted); text-align: center; margin-top: 12px;
+}
+
+.faq { background: var(--fog); border-top: 1px solid var(--line); }
+.faq-list { margin-top: 48px; display: flex; flex-direction: column; gap: 16px; }
+.faq-item {
+  background: #fff; border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 24px;
+}
+.faq-item__q {
+  font-family: var(--display); font-weight: 700; font-size: 17px;
+  margin-bottom: 10px;
+}
+.faq-item__a { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+@media (max-width: 860px) {
+  .contact-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .form-card { padding: 28px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <svg width="24" height="24" viewBox="0 0 32 32">
+        <path d="M27 16a11 11 0 1 0-6 9.8" fill="none" stroke="#102A43" stroke-width="3" stroke-linecap="round"/>
+        <path d="M22.5 16a6.5 6.5 0 1 0-3.4 5.7" fill="none" stroke="#FF6B4A" stroke-width="2.6" stroke-linecap="round"/>
+        <circle cx="24" cy="11.5" r="3.1" fill="#8FBF2E"/>
+      </svg>
+      <span class="nav__logo-name">Clart<span class="nav__logo-dot">i</span>s</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="a-propos.html">À propos</a></li>
+      <li><a href="contact.html" class="nav__cta active" style="background:var(--coral)">Nous contacter</a></li>
+    </ul>
+    <button class="nav__burger" aria-label="Menu" onclick="document.getElementById('mobile-menu').classList.toggle('open')">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <rect y="4" width="22" height="2" rx="1" fill="#102A43"/>
+        <rect y="10" width="22" height="2" rx="1" fill="#102A43"/>
+        <rect y="16" width="22" height="2" rx="1" fill="#102A43"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+<div class="nav__mobile" id="mobile-menu">
+  <a href="index.html">Accueil</a>
+  <a href="services.html">Services</a>
+  <a href="a-propos.html">À propos</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<div class="page-hero">
+  <div class="section__inner">
+    <div class="eyebrow">Contact</div>
+    <h1>Parlons de vos données.</h1>
+    <p>La première rencontre est gratuite et sans engagement. On vous dit honnêtement ce qu'on peut faire pour vous.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="section__inner">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div>
+          <h2>On vous répond sous 24h.</h2>
+          <p>Envoyez-nous votre message ou utilisez une des options ci-dessous. On prend le temps de comprendre votre situation avant de proposer quoi que ce soit.</p>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item__icon" style="background:rgba(143,191,46,.1)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="#8FBF2E" stroke-width="2"/>
+              <polyline points="22,6 12,13 2,6" stroke="#8FBF2E" stroke-width="2"/>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-item__label">Courriel</div>
+            <div class="contact-item__value">[ votre@courriel.ca ]</div>
+            <div class="contact-item__sub">Réponse sous 24h</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item__icon" style="background:rgba(255,107,74,.1)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.7A2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.27-.54a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="#FF6B4A" stroke-width="2"/>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-item__label">Téléphone</div>
+            <div class="contact-item__value">[ votre numéro ]</div>
+            <div class="contact-item__sub">Lundi–vendredi, 9h–18h EST</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item__icon" style="background:rgba(16,42,67,.07)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="#102A43" stroke-width="2"/>
+              <circle cx="12" cy="10" r="3" stroke="#102A43" stroke-width="2"/>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-item__label">Localisation</div>
+            <div class="contact-item__value">Québec, Canada</div>
+            <div class="contact-item__sub">Service partout au Québec</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <h3>Envoyer un message</h3>
+        <form action="#" method="post">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nom">Votre nom</label>
+              <input type="text" id="nom" name="nom" placeholder="Marie Tremblay" required>
+            </div>
+            <div class="form-group">
+              <label for="entreprise">Entreprise</label>
+              <input type="text" id="entreprise" name="entreprise" placeholder="Acme inc.">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Courriel</label>
+            <input type="email" id="email" name="email" placeholder="marie@exemple.com" required>
+          </div>
+          <div class="form-group">
+            <label for="service">Service qui vous intéresse</label>
+            <select id="service" name="service">
+              <option value="">Sélectionnez un service...</option>
+              <option value="dashboard">Tableau de bord Power BI</option>
+              <option value="rapport">Rapport interactif</option>
+              <option value="analyse">Analyse de performance</option>
+              <option value="entretien">Entretien mensuel</option>
+              <option value="autre">Je ne sais pas encore</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Votre message</label>
+            <textarea id="message" name="message" placeholder="Décrivez brièvement vos données, votre équipe et ce que vous aimeriez pouvoir voir..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Envoyer le message →</button>
+          <p class="form-note">La première rencontre est gratuite et sans engagement.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section faq">
+  <div class="section__inner">
+    <div class="eyebrow">FAQ</div>
+    <h2 style="font-family:var(--display);font-weight:800;font-size:clamp(28px,3.5vw,44px);margin-top:14px;letter-spacing:-.01em;">
+      Questions fréquentes
+    </h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-item__q">Est-ce que je peux faire ça moi-même avec Power BI ?</div>
+        <div class="faq-item__a">Techniquement, oui. Mais le vrai travail — nettoyer vos données, les relier correctement, s'assurer que les chiffres sont juste — représente 80% du temps. Et ce temps, pour votre équipe, vaut souvent bien plus que notre tarif. On vous livre quelque chose de fiable en 3–4 semaines pendant que vous continuez à faire ce que vous faites de mieux.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-item__q">Mes données sont-elles en sécurité ?</div>
+        <div class="faq-item__a">Absolument. Vos données restent dans votre environnement (Microsoft 365, votre serveur, etc.). On ne stocke rien de notre côté. Un accord de confidentialité peut être signé avant de commencer.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-item__q">On n'utilise pas Power BI — vous travaillez avec d'autres outils ?</div>
+        <div class="faq-item__a">Power BI est notre spécialité, mais on peut aussi produire des rapports en format Excel, PDF, ou d'autres formats selon vos besoins. Contactez-nous et on voit ensemble ce qui convient le mieux.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-item__q">Que se passe-t-il après la livraison ?</div>
+        <div class="faq-item__a">Vous devenez autonome — c'est notre objectif. On vous forme à utiliser et naviguer dans votre tableau de bord. Si vous souhaitez qu'on continue à le maintenir et le faire évoluer, on propose une formule mensuelle.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer__inner">
+    <a href="index.html" class="footer__logo">
+      <svg width="20" height="20" viewBox="0 0 32 32">
+        <path d="M27 16a11 11 0 1 0-6 9.8" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="3" stroke-linecap="round"/>
+        <path d="M22.5 16a6.5 6.5 0 1 0-3.4 5.7" fill="none" stroke="#FF6B4A" stroke-width="2.6" stroke-linecap="round"/>
+        <circle cx="24" cy="11.5" r="3.1" fill="#8FBF2E"/>
+      </svg>
+      <span class="footer__logo-name">Clartis</span>
+    </a>
+    <ul class="footer__links">
+      <li><a href="services.html">Services</a></li>
+      <li><a href="a-propos.html">À propos</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <span class="footer__copy">© 2026 Clartis Analytique · Québec, Canada</span>
+  </div>
+</footer>
+</body>
+</html>
