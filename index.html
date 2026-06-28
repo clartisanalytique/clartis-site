@@ -26,31 +26,6 @@
 html{scroll-behavior:smooth}
 body{font-family:var(--body);background:var(--bg);color:var(--fg);line-height:1.6;transition:background .3s,color .3s;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 
-/* ── NAV ── */
-.nav{position:sticky;top:0;z-index:100;height:var(--nav-h);background:var(--nav-bg);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);transition:background .3s}
-.nav-inner{margin:0 auto;padding:0 4%;height:100%;display:flex;align-items:center;gap:32px}
-
-.nav-logo-name{font-family:var(--display);font-weight:800;font-size:16px;color:var(--fg);line-height:1}
-.nav-logo-dot{color:#8FBF2E}
-.nav-links{display:flex;align-items:center;gap:32px;list-style:none;margin-left:32px}
-.nav-links a{font-size:16px;font-weight:500;color:var(--fg2);text-decoration:none;position:relative;padding-bottom:4px;transition:color .22s;white-space:nowrap}
-.nav-links a::after{content:"";position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--coral);border-radius:2px;transition:width .28s ease}
-.nav-links a:hover{color:var(--coral)}
-.nav-links a:hover::after,.nav-links a.active::after{width:100%}
-.nav-links a.active{color:var(--fg)}
-.nav-ctrl{display:flex;align-items:center;gap:8px;flex-shrink:0}
-.lang-tog{display:flex;border:1.5px solid var(--line);border-radius:999px;overflow:hidden}
-.lang-tog button{padding:6px 12px;border:none;background:none;cursor:pointer;color:var(--fg2);font-family:var(--mono);font-size:11px;letter-spacing:.06em;transition:all .2s}
-.lang-tog button.on{background:var(--fg);color:var(--bg)}
-.theme-btn{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--line);background:none;cursor:pointer;display:grid;place-items:center;color:var(--fg);transition:border-color .2s}
-.theme-btn:hover{border-color:var(--fg)}
-.nav-client{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;background:var(--coral);color:#fff;border-radius:999px;font-size:13px;font-weight:600;border:none;cursor:pointer;transition:opacity .2s,transform .15s;white-space:nowrap}
-.nav-client:hover{opacity:.88;transform:translateY(-1px)}
-.burger{display:none;background:none;border:none;cursor:pointer;color:var(--fg)}
-.mob-menu{position:fixed;inset:var(--nav-h) 0 0 0;background:var(--bg);padding:32px 24px;display:flex;flex-direction:column;gap:24px;transform:translateX(100%);transition:transform .3s;z-index:99;border-top:1px solid var(--line)}
-.mob-menu.open{transform:translateX(0)}
-.mob-menu a{font-size:22px;font-weight:700;color:var(--fg);text-decoration:none}
-
 /* ── MODAL ── */
 #modal{position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .3s}
 #modal.open{opacity:1;visibility:visible}
@@ -161,36 +136,69 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:36px 4%;tr
   .dash{display:none}
   .svc-grid,.proc-grid{grid-template-columns:1fr}
   .proc-step{border-radius:12px !important}
-  .nav-links,.nav-client{display:none}
-  .burger{display:block}
+  .nav-links,
+  
   .nav-inner{padding:0 4%;border-bottom:1px solid var(--card-b)}
   .h-stat:last-child{border-bottom:none}
   .footer{padding:36px 4%;top:0;z-index:100;height:var(--nav-h);background:var(--nav-bg);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);transition:background .3s}
 .nav-inner{margin:0 auto;padding:0 4%;height:100%;display:flex;align-items:center;justify-content:space-between;gap:20px}
 
 /* Logo : pas de pill, texte escamoté au hover */
-.nav-brand{display:flex;align-items:center;gap:28px;flex-shrink:0}
 
-.nav-logo-name{font-family:var(--display);font-weight:800;font-size:22px;color:var(--fg);line-height:1;white-space:nowrap}
+
+
 
 /* Point vert sur le i — ı = dotless i + cercle lime au-dessus */
-.nav-i{display:inline-block;position:relative}
-.nav-i::after{content:"";position:absolute;top:.04em;left:50%;transform:translateX(-50%);width:.22em;height:.22em;background:#8FBF2E;border-radius:50%}
+
+
 
 /* Liens collés au logo */
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ── NAV ── */
+.nav{position:sticky;top:0;z-index:100;height:var(--nav-h);background:var(--nav-bg);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);transition:background .3s}
+.nav-inner{width:100%;padding:0 4%;height:100%;display:flex;align-items:center;gap:0}
+/* Gauche : logo + liens */
+.nav-left{display:flex;align-items:center;gap:32px;flex:1}
+/* Logo : image + texte, sans border ni pill */
+.nav-logo{display:inline-flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;transition:opacity .2s}
+.nav-logo:hover{opacity:.75}
+.nav-logo img{width:34px;height:34px;object-fit:contain;display:block}
+.nav-logo-name{font-family:var(--display);font-weight:800;font-size:21px;color:var(--fg);line-height:1;white-space:nowrap}
+.nav-i{display:inline-block;position:relative}
+.nav-i::after{content:"";position:absolute;top:.04em;left:50%;transform:translateX(-50%);width:.22em;height:.22em;background:#8FBF2E;border-radius:50%}
+/* Liens */
 .nav-links{display:flex;align-items:center;gap:28px;list-style:none}
-.nav-links a{font-size:16px;font-weight:500;color:var(--fg2);text-decoration:none;position:relative;padding-bottom:4px;transition:color .22s;white-space:nowrap}
+.nav-links a{font-size:15px;font-weight:500;color:var(--fg2);text-decoration:none;position:relative;padding-bottom:4px;transition:color .22s;white-space:nowrap}
 .nav-links a::after{content:"";position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--coral);border-radius:2px;transition:width .28s ease}
 .nav-links a:hover{color:var(--coral)}
 .nav-links a:hover::after,.nav-links a.active::after{width:100%}
 .nav-links a.active{color:var(--fg)}
+/* Droite : FR/EN + thème + espace client */
 .nav-ctrl{display:flex;align-items:center;gap:8px;flex-shrink:0}
-.nav-logo{display:inline-flex;align-items:center;gap:10px;text-decoration:none;transition:opacity .2s}
-.nav-logo:hover{opacity:.75}
-.nav-logo img{width:34px;height:34px;object-fit:contain;flex-shrink:0;display:block}
-.nav-logo-name{font-family:var(--display);font-weight:800;font-size:22px;color:var(--fg);line-height:1;white-space:nowrap}
-.nav-i{display:inline-block;position:relative}
-.nav-i::after{content:"";position:absolute;top:.04em;left:50%;transform:translateX(-50%);width:.22em;height:.22em;background:#8FBF2E;border-radius:50%}
+.lang-tog{display:flex;border:1.5px solid var(--line);border-radius:999px;overflow:hidden}
+.lang-tog button{padding:6px 12px;border:none;background:none;cursor:pointer;color:var(--fg2);font-family:var(--mono);font-size:11px;letter-spacing:.06em;transition:all .2s}
+.lang-tog button.on{background:var(--fg);color:var(--bg)}
+.theme-btn{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--line);background:none;cursor:pointer;display:grid;place-items:center;color:var(--fg);transition:border-color .2s}
+.theme-btn:hover{border-color:var(--fg)}
+.nav-client{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;background:var(--coral);color:#fff;border-radius:999px;font-size:13px;font-weight:600;border:none;cursor:pointer;transition:opacity .2s,transform .15s;white-space:nowrap}
+.nav-client:hover{opacity:.88;transform:translateY(-1px)}
+.burger{display:none;background:none;border:none;cursor:pointer;color:var(--fg)}
+.mob-menu{position:fixed;inset:var(--nav-h) 0 0 0;background:var(--bg);padding:32px 24px;display:flex;flex-direction:column;gap:24px;transform:translateX(100%);transition:transform .3s;z-index:99;border-top:1px solid var(--line)}
+.mob-menu.open{transform:translateX(0)}
+.mob-menu a{font-size:22px;font-weight:700;color:var(--fg);text-decoration:none}
+@media(max-width:1024px){.nav-links,.nav-client{display:none}.burger{display:block}}
 </style>
 </head>
 <body>
@@ -213,21 +221,21 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:36px 4%;tr
 <!-- NAV -->
 <nav class="nav">
   <div class="nav-inner">
-    <!-- Logo + liens gauche -->
-    <div class="nav-brand">
-      <a href="index.html" class="nav-logo" aria-label="Clartis">
-        <img src="clartis-logo.png" alt="Clartis logo" style="width:34px;height:34px;display:block;background:none">
+    <!-- GAUCHE : logo + liens -->
+    <div class="nav-left">
+      <a href="index.html" class="nav-logo">
+        <img src="clartis-logo.png" alt="Clartis">
         <span class="nav-logo-name">Clart<span class="nav-i">ı</span>s</span>
       </a>
       <ul class="nav-links">
-        <li><a href="index.html" class="active" data-fr="Accueil" data-en="Home">Accueil</a></li>
-        <li><a href="services.html" data-fr="Services" data-en="Services">Services</a></li>
-        <li><a href="a-propos.html" data-fr="À propos" data-en="About">À propos</a></li>
-        <li><a href="index.html#" data-fr="Réalisations" data-en="Portfolio">Réalisations</a></li>
-        <li><a href="contact.html" data-fr="Nous contacter" data-en="Contact">Nous contacter</a></li>
+      <li><a href="index.html" class="active">Accueil</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="a-propos.html">À propos</a></li>
+      <li><a href="index.html#">Réalisations</a></li>
+      <li><a href="contact.html">Nous contacter</a></li>
       </ul>
     </div>
-    <!-- Contrôles droite -->
+    <!-- DROITE : FR/EN + thème + espace client -->
     <div class="nav-ctrl">
       <div class="lang-tog">
         <button id="btn-fr" class="on" onclick="setLang('fr')">FR</button>
