@@ -173,6 +173,33 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:36px 24px;
   .h-stat:last-child{border-bottom:none}
   .intro__btn{min-width:150px;padding:20px 28px}
 }
+/* ── NAV ── */
+.nav{position:sticky;top:0;z-index:100;height:var(--nav-h);background:var(--nav-bg);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);transition:background .3s}
+.nav-inner{width:100%;max-width:1600px;margin:0 auto;padding:0 56px;height:100%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px}
+.nav-logo{display:inline-flex;align-items:center;justify-content:center;justify-self:center;text-decoration:none;transition:opacity .2s;padding:4px}
+.nav-logo:hover{opacity:.7}
+.nav-left{display:flex;align-items:center;gap:32px;list-style:none;justify-self:start}
+.nav-right{display:flex;align-items:center;gap:24px;justify-self:end}
+.nav-right-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-left a,.nav-right-links a{font-size:15.5px;font-weight:500;color:var(--fg2);text-decoration:none;position:relative;padding-bottom:4px;transition:color .22s}
+.nav-left a::after,.nav-right-links a::after{content:"";position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--coral);border-radius:2px;transition:width .28s ease}
+.nav-left a:hover,.nav-right-links a:hover{color:var(--coral)}
+.nav-left a:hover::after,.nav-right-links a:hover::after{width:100%}
+.nav-left a.active,.nav-right-links a.active{color:var(--fg)}
+.nav-left a.active::after,.nav-right-links a.active::after{width:100%}
+.nav-ctrl{display:flex;align-items:center;gap:8px}
+.lang-tog{display:flex;border:1.5px solid var(--line);border-radius:999px;overflow:hidden}
+.lang-tog button{padding:6px 12px;border:none;background:none;cursor:pointer;color:var(--fg2);font-family:var(--mono);font-size:11px;letter-spacing:.06em;transition:all .2s}
+.lang-tog button.on{background:var(--fg);color:var(--bg)}
+.theme-btn{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--line);background:none;cursor:pointer;display:grid;place-items:center;color:var(--fg);transition:border-color .2s;flex-shrink:0}
+.theme-btn:hover{border-color:var(--fg)}
+.nav-client{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;background:var(--coral);color:#fff;border-radius:999px;font-size:13px;font-weight:600;border:none;cursor:pointer;transition:opacity .2s,transform .15s;white-space:nowrap}
+.nav-client:hover{opacity:.88;transform:translateY(-1px)}
+.burger{display:none;background:none;border:none;cursor:pointer;color:var(--fg)}
+.mob-menu{position:fixed;inset:var(--nav-h) 0 0 0;background:var(--bg);padding:32px 24px;display:flex;flex-direction:column;gap:24px;transform:translateX(100%);transition:transform .3s;z-index:99;border-top:1px solid var(--line)}
+.mob-menu.open{transform:translateX(0)}
+.mob-menu a{font-size:22px;font-weight:700;color:var(--fg);text-decoration:none}
+@media(max-width:1024px){.nav-left,.nav-right-links,.nav-client{display:none}.burger{display:block}.nav-inner{grid-template-columns:1fr auto 1fr}}
 </style>
 </head>
 <body>
@@ -213,26 +240,41 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:36px 24px;
 <!-- NAV -->
 <nav class="nav">
   <div class="nav-inner">
-    <ul class="nav-links">
-      <li><a href="index.html" class="active" data-fr="Accueil" data-en="Home">Accueil</a></li>
+    <ul class="nav-left">
+      <li><a href="index.html" class="active" data-fr="Accueil" data-en="Accueil">Accueil</a></li>
       <li><a href="services.html" data-fr="Services" data-en="Services">Services</a></li>
-      <li><a href="a-propos.html" data-fr="À propos" data-en="About">À propos</a></li>
-      <li><a href="#" data-fr="Réalisations" data-en="Portfolio">Réalisations</a></li>
-      <li><a href="contact.html" data-fr="Nous contacter" data-en="Contact">Nous contacter</a></li>
     </ul>
-    <a href="index.html" class="nav-logo">
-      <svg width="22" height="22" viewBox="0 0 32 32">
-        <path d="M27 16a11 11 0 1 0-6 9.8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-        <path d="M22.5 16a6.5 6.5 0 1 0-3.4 5.7" fill="none" stroke="#FF6B4A" stroke-width="2.6" stroke-linecap="round"/>
-        <circle cx="24" cy="11.5" r="3.1" fill="#8FBF2E"/>
+    <a href="index.html" class="nav-logo" aria-label="Clartis Accueil">
+      <svg width="38" height="38" viewBox="0 0 32 32" aria-label="Clartis">
+        <path d="M27 16a11 11 0 1 0-6 9.8" fill="none" stroke="currentColor" stroke-width="3.8" stroke-linecap="round"/>
+        <path d="M22.5 16a6.5 6.5 0 1 0-3.4 5.7" fill="none" stroke="#FF6B4A" stroke-width="3.2" stroke-linecap="round"/>
+        <circle cx="24" cy="11.5" r="3.4" fill="#8FBF2E"/>
       </svg>
-      <span class="nav-logo-name">Clart<span class="nav-logo-dot">i</span>s</span>
     </a>
-    <div class="nav-ctrl">
-      <div class="lang-tog">
-        <button id="btn-fr" class="on" onclick="setLang('fr')">FR</button>
-        <button id="btn-en" onclick="setLang('en')">EN</button>
+    <div class="nav-right">
+      <ul class="nav-right-links">
+        <li><a href="a-propos.html" data-fr="À propos" data-en="À propos">À propos</a></li>
+        <li><a href="index.html#" data-fr="Réalisations" data-en="Réalisations">Réalisations</a></li>
+        <li><a href="contact.html" data-fr="Nous contacter" data-en="Nous contacter">Nous contacter</a></li>
+      </ul>
+      <div class="nav-ctrl">
+        <div class="lang-tog">
+          <button id="btn-fr" class="on" onclick="setLang('fr')">FR</button>
+          <button id="btn-en" onclick="setLang('en')">EN</button>
+        </div>
+        <button class="theme-btn" onclick="toggleTheme()" id="theme-btn" aria-label="Changer le thème">
+          <svg id="ico-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg id="ico-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        </button>
+        <button class="nav-client" onclick="document.getElementById('modal').classList.add('open')">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          <span data-fr="Espace client" data-en="Client portal">Espace client</span>
+        </button>
+        <button class="burger" onclick="document.getElementById('mob').classList.toggle('open')" aria-label="Menu">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect y="4" width="22" height="2" rx="1" fill="currentColor"/><rect y="10" width="22" height="2" rx="1" fill="currentColor"/><rect y="16" width="22" height="2" rx="1" fill="currentColor"/></svg>
+        </button>
       </div>
+    </div>
   </div>
 </nav>
 <div class="mob-menu" id="mob">
@@ -383,14 +425,14 @@ function toggleTheme(){
   document.getElementById('ico-sun').style.display=dark?'block':'none';
   document.getElementById('ico-moon').style.display=dark?'none':'block';
   localStorage.setItem('cl-theme',dark?'light':'dark');
-  setTimeout(initChart,150);
 }
 (function(){
   const s=localStorage.getItem('cl-theme')||'dark';
   document.documentElement.setAttribute('data-theme',s);
-  if(s==='dark'){document.getElementById('ico-sun').style.display='none';document.getElementById('ico-moon').style.display='block';}
+  const isDark=s==='dark';
+  document.getElementById('ico-sun').style.display=isDark?'none':'block';
+  document.getElementById('ico-moon').style.display=isDark?'block':'none';
 })();
-
 /* LANG */
 let lang='fr';
 function setLang(l){
@@ -400,56 +442,6 @@ function setLang(l){
   document.querySelectorAll('[data-fr]').forEach(el=>{const v=el.getAttribute('data-'+l);if(v)el.textContent=v;});
   document.documentElement.lang=l;
 }
-
-/* CHART */
-function initChart(){
-  const c=document.getElementById('chart');
-  if(!c||!c.offsetWidth)return;
-  const ctx=c.getContext('2d'),W=c.offsetWidth,H=150,dpr=window.devicePixelRatio||1;
-  c.width=W*dpr;c.height=H*dpr;ctx.scale(dpr,dpr);
-  const dark=document.documentElement.getAttribute('data-theme')==='dark';
-  const months=['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];
-  const vals=[82,91,87,112,105,134,128,151,145,168,160,184];
-  const xOf=i=>36+(i/(vals.length-1))*(W-52);
-  const yOf=v=>H-26-((v-60)/(210-60))*(H-46);
-  const gridC=dark?'rgba(255,255,255,.09)':'rgba(16,42,67,.07)';
-  const lblC=dark?'rgba(255,255,255,.3)':'#9AA6B2';
-  function draw(hov){
-    ctx.clearRect(0,0,W,H);
-    ctx.strokeStyle=gridC;ctx.lineWidth=1;
-    [0,.33,.66,1].forEach(t=>{const y=12+t*(H-38);ctx.beginPath();ctx.moveTo(32,y);ctx.lineTo(W-8,y);ctx.stroke();});
-    const gr=ctx.createLinearGradient(0,0,0,H);
-    gr.addColorStop(0,'rgba(255,107,74,.2)');gr.addColorStop(1,'rgba(255,107,74,0)');
-    ctx.beginPath();ctx.moveTo(xOf(0),yOf(vals[0]));
-    vals.forEach((_,i)=>{if(i)ctx.lineTo(xOf(i),yOf(vals[i]));});
-    ctx.lineTo(xOf(vals.length-1),H-26);ctx.lineTo(xOf(0),H-26);
-    ctx.closePath();ctx.fillStyle=gr;ctx.fill();
-    ctx.beginPath();ctx.strokeStyle='#FF6B4A';ctx.lineWidth=2.5;ctx.lineJoin='round';ctx.lineCap='round';
-    vals.forEach((v,i)=>i?ctx.lineTo(xOf(i),yOf(v)):ctx.moveTo(xOf(i),yOf(v)));
-    ctx.stroke();
-    vals.forEach((v,i)=>{
-      ctx.beginPath();ctx.arc(xOf(i),yOf(v),i===hov?6:3.5,0,Math.PI*2);
-      ctx.fillStyle=i===hov?'#FF6B4A':'#8FBF2E';ctx.fill();
-      if(i===hov){ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();}
-    });
-    ctx.fillStyle=lblC;ctx.font='9px IBM Plex Mono,monospace';ctx.textAlign='center';
-    months.forEach((m,i)=>ctx.fillText(m,xOf(i),H-8));
-  }
-  draw(-1);
-  c.onmousemove=function(e){
-    const r=c.getBoundingClientRect(),mx=e.clientX-r.left;
-    let best=-1,bd=36;
-    vals.forEach((_,i)=>{const d=Math.abs(xOf(i)-mx);if(d<bd){bd=d;best=i;}});
-    draw(best);
-    const t=document.getElementById('tip');
-    if(best>=0){t.textContent=months[best]+' — '+(vals[best]*10)+'K$';t.style.opacity='1';t.style.left=xOf(best)+'px';t.style.top=yOf(vals[best])+'px';}
-    else t.style.opacity='0';
-  };
-  c.onmouseleave=function(){draw(-1);document.getElementById('tip').style.opacity='0';};
-}
-setTimeout(initChart,200);
-
-/* SCROLL REVEAL */
 function reveal(){
   document.querySelectorAll('.svc-card,.proc-step').forEach((el,i)=>{
     if(el.getBoundingClientRect().top<window.innerHeight-50){
