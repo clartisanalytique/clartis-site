@@ -33,7 +33,7 @@ body{font-family:var(--body);background:var(--bg);color:var(--fg);line-height:1.
 .nav-logo:hover{opacity:.7}
 .nav-logo-name{font-family:var(--display);font-weight:800;font-size:16px;color:var(--fg);line-height:1}
 .nav-logo-dot{color:#8FBF2E}
-.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none;margin-left:32px}
 .nav-links a{font-size:16px;font-weight:500;color:var(--fg2);text-decoration:none;position:relative;padding-bottom:4px;transition:color .22s;white-space:nowrap}
 .nav-links a::after{content:"";position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--coral);border-radius:2px;transition:width .28s ease}
 .nav-links a:hover{color:var(--coral)}
@@ -376,6 +376,8 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:36px 56px;
 
 <script>
 /* THEME */
+// Force dark mode par défaut (réinitialise anciennes préférences light)
+if(!localStorage.getItem('cl-theme-v3')) document.documentElement.setAttribute('data-theme','dark');
 function toggleTheme(){
   const d=document.documentElement,dark=d.getAttribute('data-theme')==='dark';
   d.setAttribute('data-theme',dark?'light':'dark');
