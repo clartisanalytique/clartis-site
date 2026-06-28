@@ -177,13 +177,10 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:36px 56px;
 
 /* Logo : pas de pill, texte escamoté au hover */
 .nav-brand{display:flex;align-items:center;gap:28px;flex-shrink:0}
-.nav-logo{display:inline-flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer}
-.nav-logo-svg{flex-shrink:0;transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
-.nav-logo:hover .nav-logo-svg{transform:scale(1.18)}
-.nav-logo-text-clip{overflow:hidden;max-width:180px;transition:max-width .48s cubic-bezier(.4,0,.2,1),opacity .35s ease}
-.nav-logo:hover .nav-logo-text-clip{max-width:0;opacity:0}
-.nav-logo-name{font-family:var(--display);font-weight:800;font-size:22px;color:var(--fg);line-height:1;white-space:nowrap;display:block;transform:translateX(0);transition:transform .45s ease}
-.nav-logo:hover .nav-logo-name{transform:translateX(-6px)}
+.nav-logo{display:inline-flex;align-items:center;gap:10px;text-decoration:none;transition:opacity .2s}
+.nav-logo:hover{opacity:.8}
+.nav-logo img{width:32px;height:32px;object-fit:contain;flex-shrink:0}
+.nav-logo-name{font-family:var(--display);font-weight:800;font-size:22px;color:var(--fg);line-height:1;white-space:nowrap}
 
 /* Point vert sur le i — ı = dotless i + cercle lime au-dessus */
 .nav-i{display:inline-block;position:relative}
@@ -222,14 +219,8 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:36px 56px;
     <!-- Logo + liens gauche -->
     <div class="nav-brand">
       <a href="index.html" class="nav-logo" aria-label="Clartis">
-        <svg class="nav-logo-svg" width="30" height="30" viewBox="0 0 32 32">
-          <path d="M27 16a11 11 0 1 0-6 9.8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-          <path d="M22.5 16a6.5 6.5 0 1 0-3.4 5.7" fill="none" stroke="#FF6B4A" stroke-width="2.6" stroke-linecap="round"/>
-          <circle cx="24" cy="11.5" r="3.1" fill="#8FBF2E"/>
-        </svg>
-        <div class="nav-logo-text-clip">
-          <span class="nav-logo-name">Clart<span class="nav-i">ı</span>s</span>
-        </div>
+        <img src="clartis-symbole-blanc.png" alt="Clartis symbole">
+        <span class="nav-logo-name">Clart<span class="nav-i">ı</span>s</span>
       </a>
       <ul class="nav-links">
         <li><a href="index.html" class="active" data-fr="Accueil" data-en="Home">Accueil</a></li>
