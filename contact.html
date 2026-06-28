@@ -1,281 +1,511 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" data-theme="light">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Contact — Clartis Analytique</title>
-<meta name="description" content="Contactez Clartis Analytique. La première rencontre est gratuite.">
-<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,700;12..96,75..100,800&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-.page-hero { background: var(--fog); padding: 80px 24px 64px; border-bottom: 1px solid var(--line); }
-.page-hero h1 {
-  font-family: var(--display); font-weight: 800;
-  font-size: clamp(36px, 5vw, 64px); letter-spacing: -.02em;
-  margin-top: 14px; max-width: 20ch;
+:root{
+  --bg:#fff;--bg2:#F4F7FA;--fg:#102A43;--fg2:#5A6B7E;
+  --coral:#FF6B4A;--lime:#8FBF2E;--line:#E4E9EF;
+  --card:#fff;--card-b:#E4E9EF;--nav-bg:rgba(255,255,255,.95);
+  --shadow:0 4px 24px rgba(16,42,67,.10);
+  --display:'Bricolage Grotesque',sans-serif;
+  --body:'Inter',sans-serif;--mono:'IBM Plex Mono',monospace;
+  --nav-h:68px;--max-w:1100px;
 }
-.page-hero p { font-size: 17px; color: var(--muted); max-width: 48ch; line-height: 1.7; margin-top: 16px; }
+[data-theme="dark"]{
+  --bg:#102A43;--bg2:#0E2243;--fg:#fff;--fg2:rgba(255,255,255,.5);
+  --line:rgba(255,255,255,.1);--card:rgba(255,255,255,.05);--card-b:rgba(255,255,255,.1);
+  --nav-bg:rgba(16,42,67,.97);--shadow:0 4px 32px rgba(0,0,0,.4);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--bg);color:var(--fg);line-height:1.6;transition:background .3s,color .3s;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 
-.contact-grid {
-  display: grid; grid-template-columns: 1fr 1.4fr;
-  gap: 64px; align-items: flex-start;
-}
-.contact-info { display: flex; flex-direction: column; gap: 32px; }
-.contact-info h2 {
-  font-family: var(--display); font-weight: 800;
-  font-size: 28px; letter-spacing: -.01em;
-}
-.contact-info p { font-size: 15px; color: var(--muted); line-height: 1.75; }
+/* ── NAV ── */
+.nav{position:sticky;top:0;z-index:100;height:var(--nav-h);background:var(--nav-bg);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);transition:background .3s}
+.nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 24px;height:100%;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.nav-logo{display:inline-flex;align-items:center;gap:9px;border:1.5px solid var(--fg);border-radius:999px;padding:7px 16px 7px 8px;text-decoration:none;transition:opacity .2s}
+.nav-logo:hover{opacity:.7}
+.nav-logo-name{font-family:var(--display);font-weight:800;font-size:16px;color:var(--fg);line-height:1}
+.nav-logo-dot{color:#8FBF2E}
+.nav-links{display:flex;align-items:center;gap:22px;list-style:none}
+.nav-links a{font-size:13px;font-weight:500;color:var(--fg2);text-decoration:none;transition:color .2s;white-space:nowrap}
+.nav-links a:hover,.nav-links a.active{color:var(--fg)}
+.nav-ctrl{display:flex;align-items:center;gap:8px}
+.lang-tog{display:flex;border:1.5px solid var(--line);border-radius:999px;overflow:hidden}
+.lang-tog button{padding:5px 10px;border:none;background:none;cursor:pointer;color:var(--fg2);font-family:var(--mono);font-size:10px;letter-spacing:.06em;transition:all .2s}
+.lang-tog button.on{background:var(--fg);color:var(--bg)}
+.theme-btn{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--line);background:none;cursor:pointer;display:grid;place-items:center;color:var(--fg);transition:border-color .2s}
+.theme-btn:hover{border-color:var(--fg)}
+.nav-client{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--coral);color:#fff;border-radius:999px;font-size:13px;font-weight:600;border:none;cursor:pointer;transition:opacity .2s,transform .15s;white-space:nowrap}
+.nav-client:hover{opacity:.88;transform:translateY(-1px)}
+.burger{display:none;background:none;border:none;cursor:pointer;color:var(--fg)}
+.mob-menu{position:fixed;inset:var(--nav-h) 0 0 0;background:var(--bg);padding:32px 24px;display:flex;flex-direction:column;gap:24px;transform:translateX(100%);transition:transform .3s;z-index:99;border-top:1px solid var(--line)}
+.mob-menu.open{transform:translateX(0)}
+.mob-menu a{font-size:22px;font-weight:700;color:var(--fg);text-decoration:none}
 
-.contact-item {
-  display: flex; align-items: flex-start; gap: 16px;
-  padding: 20px; background: var(--fog);
-  border-radius: 12px; border: 1px solid var(--line);
-}
-.contact-item__icon {
-  width: 40px; height: 40px; border-radius: 10px;
-  display: grid; place-items: center; flex-shrink: 0;
-}
-.contact-item__label {
-  font-family: var(--mono); font-size: 10px;
-  letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
-  margin-bottom: 4px;
-}
-.contact-item__value { font-size: 15px; font-weight: 600; color: var(--marine); }
-.contact-item__sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
+/* ── MODAL ── */
+#modal{position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .3s}
+#modal.open{opacity:1;visibility:visible}
+.modal-box{background:var(--bg);border-radius:20px;padding:48px;width:min(440px,calc(100vw - 40px));box-shadow:0 30px 80px rgba(0,0,0,.35);position:relative}
+.modal-x{position:absolute;top:14px;right:14px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--fg2);line-height:1;padding:6px}
+.modal-title{font-family:var(--display);font-weight:800;font-size:24px;margin-bottom:6px}
+.modal-sub{font-size:14px;color:var(--fg2);margin-bottom:28px}
+.modal-inp{width:100%;padding:12px 16px;border:1.5px solid var(--line);border-radius:10px;font-family:var(--body);font-size:14px;background:var(--bg);color:var(--fg);outline:none;transition:border-color .2s;margin-bottom:12px}
+.modal-inp:focus{border-color:var(--coral)}
+.modal-btn{width:100%;padding:13px;background:var(--coral);color:#fff;border:none;border-radius:999px;font-weight:700;font-size:15px;cursor:pointer;transition:opacity .2s}
+.modal-btn:hover{opacity:.88}
+.modal-note{font-size:12px;color:var(--fg2);text-align:center;margin-top:12px}
+
+/* ── UTILITAIRES ── */
+.sec{padding:96px 24px;transition:background .3s}
+.sec-inner{max-width:var(--max-w);margin:0 auto}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--lime);display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.eyebrow::before{content:"";display:block;width:24px;height:1.5px;background:var(--lime);border-radius:2px}
+.sec-title{font-family:var(--display);font-weight:800;font-size:clamp(28px,4vw,48px);letter-spacing:-.02em;color:var(--fg);line-height:1.05}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
+.reveal.vis{opacity:1;transform:translateY(0)}
+.btn-a{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--coral);color:#fff;border-radius:999px;font-weight:700;font-size:14px;text-decoration:none;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 18px rgba(255,107,74,.4)}
+.btn-a:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(255,107,74,.55)}
+.btn-white{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:transparent;color:#fff;border-radius:999px;font-weight:600;font-size:14px;text-decoration:none;border:1.5px solid rgba(255,255,255,.35);transition:all .2s}
+.btn-white:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.7);transform:translateY(-2px)}
+
+/* ── PAGE HERO ── */
+.page-hero{background:var(--bg2);padding:80px 24px 70px;border-bottom:1px solid var(--line);position:relative;overflow:hidden;transition:background .3s}
+.ph-bg{position:absolute;inset:0;pointer-events:none;opacity:.04}
+.ph-inner{max-width:var(--max-w);margin:0 auto;position:relative;z-index:1}
+.ph-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--lime);display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.ph-eyebrow::before{content:"";display:block;width:24px;height:1.5px;background:var(--lime);border-radius:2px}
+.ph-title{font-family:var(--display);font-weight:800;font-size:clamp(36px,5vw,62px);letter-spacing:-.025em;color:var(--fg);line-height:.95;max-width:18ch;margin-bottom:20px}
+.ph-title em{color:var(--coral);font-style:normal}
+.ph-desc{font-size:17px;color:var(--fg2);max-width:50ch;line-height:1.7}
+
+/* ── CONTACT GRID ── */
+.contact-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:64px;align-items:flex-start}
+
+/* Infos */
+.contact-info{display:flex;flex-direction:column;gap:14px}
+.ci-title{font-family:var(--display);font-weight:800;font-size:26px;color:var(--fg);margin-bottom:6px}
+.ci-sub{font-size:15px;color:var(--fg2);line-height:1.72;margin-bottom:8px}
+.ci-card{display:flex;align-items:flex-start;gap:14px;padding:18px 20px;background:var(--bg2);border:1px solid var(--card-b);border-radius:12px;transition:transform .25s,box-shadow .25s}
+.ci-card:hover{transform:translateX(5px);box-shadow:var(--shadow)}
+.ci-icon{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;flex-shrink:0}
+.ci-label{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg2);margin-bottom:4px}
+.ci-val{font-size:14px;font-weight:600;color:var(--fg)}
+.ci-hint{font-size:12px;color:var(--fg2);margin-top:2px}
 
 /* Formulaire */
-.form-card {
-  background: #fff; border: 1px solid var(--line);
-  border-radius: 16px; padding: 40px;
-}
-.form-card h3 {
-  font-family: var(--display); font-weight: 700;
-  font-size: 22px; margin-bottom: 24px;
-}
-.form-group { margin-bottom: 20px; }
-.form-group label {
-  display: block; font-size: 13px; font-weight: 600;
-  margin-bottom: 7px; color: var(--marine);
-}
-.form-group input,
-.form-group select,
-.form-group textarea {
-  width: 100%; padding: 12px 16px;
-  border: 1.5px solid var(--line); border-radius: var(--radius);
-  font-family: var(--body); font-size: 14px; color: var(--marine);
-  background: #fff; outline: none;
-  transition: border-color .2s;
-}
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus { border-color: var(--marine); }
-.form-group textarea { resize: vertical; min-height: 120px; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.form-submit {
-  width: 100%; padding: 14px;
-  background: var(--marine); color: #fff;
-  border: none; border-radius: 999px;
-  font-family: var(--body); font-size: 15px; font-weight: 600;
-  cursor: pointer; transition: opacity .2s;
-}
-.form-submit:hover { opacity: .85; }
-.form-note {
-  font-size: 12px; color: var(--muted); text-align: center; margin-top: 12px;
-}
+.form-card{background:var(--card);border:1px solid var(--card-b);border-radius:18px;padding:40px;box-shadow:var(--shadow)}
+.form-card h3{font-family:var(--display);font-weight:800;font-size:22px;color:var(--fg);margin-bottom:24px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:13px;font-weight:600;color:var(--fg);margin-bottom:7px}
+.form-inp{width:100%;padding:12px 16px;border:1.5px solid var(--line);border-radius:10px;font-family:var(--body);font-size:14px;background:var(--bg);color:var(--fg);outline:none;transition:border-color .2s,box-shadow .2s;appearance:none}
+.form-inp:focus{border-color:var(--coral);box-shadow:0 0 0 3px rgba(255,107,74,.1)}
+textarea.form-inp{resize:vertical;min-height:120px}
+.form-submit{width:100%;padding:14px;background:var(--coral);color:#fff;border:none;border-radius:999px;font-family:var(--body);font-weight:700;font-size:15px;cursor:pointer;transition:transform .2s,box-shadow .2s,opacity .2s;box-shadow:0 4px 18px rgba(255,107,74,.4)}
+.form-submit:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(255,107,74,.5)}
+.form-note{font-size:12px;color:var(--fg2);text-align:center;margin-top:12px}
 
-.faq { background: var(--fog); border-top: 1px solid var(--line); }
-.faq-list { margin-top: 48px; display: flex; flex-direction: column; gap: 16px; }
-.faq-item {
-  background: #fff; border: 1px solid var(--line);
-  border-radius: var(--radius); padding: 24px;
-}
-.faq-item__q {
-  font-family: var(--display); font-weight: 700; font-size: 17px;
-  margin-bottom: 10px;
-}
-.faq-item__a { font-size: 14px; color: var(--muted); line-height: 1.7; }
+/* ── FAQ ACCORDÉON ── */
+.faq-sec{background:var(--bg2);transition:background .3s}
+.faq-list{display:flex;flex-direction:column;gap:10px;margin-top:48px}
+.faq-item{background:var(--card);border:1px solid var(--card-b);border-radius:14px;overflow:hidden;transition:box-shadow .3s}
+.faq-item.open{box-shadow:0 8px 28px rgba(16,42,67,.1)}
+.faq-item.open .faq-icon{transform:rotate(180deg)}
+.faq-q{display:flex;align-items:center;justify-content:space-between;padding:22px 24px;cursor:pointer;gap:16px;transition:background .2s}
+.faq-q:hover{background:var(--bg2)}
+.faq-q-text{font-family:var(--display);font-weight:700;font-size:17px;color:var(--fg);line-height:1.25}
+.faq-icon{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;flex-shrink:0;color:var(--coral);transition:transform .4s cubic-bezier(.34,1.2,.64,1),background .2s,border-color .2s}
+.faq-item.open .faq-icon{background:var(--coral);border-color:var(--coral);color:#fff}
+.faq-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s ease}
+.faq-item.open .faq-body{grid-template-rows:1fr}
+.faq-body-inner{overflow:hidden}
+.faq-a{padding:0 24px 22px;font-size:14px;color:var(--fg2);line-height:1.75;border-top:1px solid var(--line);padding-top:18px}
 
-@media (max-width: 860px) {
-  .contact-grid { grid-template-columns: 1fr; }
-  .form-row { grid-template-columns: 1fr; }
-  .form-card { padding: 28px; }
+/* ── CTA ── */
+.cta-sec{background:#102A43;padding:130px 24px;text-align:center;position:relative;overflow:hidden}
+[data-theme="dark"] .cta-sec{background:#0A1E30}
+.cta-bg{position:absolute;inset:0;pointer-events:none;opacity:.06}
+.cta-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
+.cta-title{font-family:var(--display);font-weight:800;font-size:clamp(30px,5vw,54px);color:#fff;letter-spacing:-.02em;margin-bottom:18px;line-height:1.1}
+.cta-title em{color:var(--coral);font-style:normal}
+.cta-sub{font-size:17px;color:rgba(255,255,255,.5);margin-bottom:48px;line-height:1.7;max-width:46ch;margin-left:auto;margin-right:auto}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* ── FOOTER ── */
+footer{background:var(--bg2);border-top:1px solid var(--line);padding:36px 24px;transition:background .3s}
+.foot-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.foot-logo{display:inline-flex;align-items:center;gap:9px;border:1.5px solid var(--fg);border-radius:999px;padding:7px 16px 7px 8px;text-decoration:none}
+.foot-logo-name{font-family:var(--display);font-weight:800;font-size:15px;color:var(--fg)}
+.foot-right{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.foot-social-label{font-size:13px;color:var(--fg2);font-weight:500}
+.foot-social{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border:1.5px solid var(--line);border-radius:999px;font-size:13px;font-weight:500;color:var(--fg2);text-decoration:none;transition:all .2s}
+.foot-social:hover{border-color:var(--fg);color:var(--fg)}
+.foot-copy{font-family:var(--mono);font-size:11px;color:var(--fg2);letter-spacing:.05em}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .contact-grid{grid-template-columns:1fr;gap:40px}
+  .nav-links,.nav-client{display:none}
+  .burger{display:block}
+  .form-row{grid-template-columns:1fr}
+  .form-card{padding:28px}
 }
+@media(max-width:600px){.cta-sec{padding:80px 24px}}
 </style>
 </head>
 <body>
 
+<!-- MODAL -->
+<div id="modal">
+  <div class="modal-box">
+    <button class="modal-x" onclick="document.getElementById('modal').classList.remove('open')">✕</button>
+    <div class="modal-title">Espace client</div>
+    <div class="modal-sub">Connectez-vous pour accéder à vos tableaux de bord.</div>
+    <form onsubmit="return false">
+      <input class="modal-inp" type="email" placeholder="Courriel">
+      <input class="modal-inp" type="password" placeholder="Mot de passe">
+      <button class="modal-btn">Se connecter →</button>
+    </form>
+    <p class="modal-note">Pas encore client ? <a href="#contact-form" style="color:var(--coral)" onclick="document.getElementById('modal').classList.remove('open')">Écrivez-nous</a></p>
+  </div>
+</div>
+
+<!-- NAV -->
 <nav class="nav">
-  <div class="nav__inner">
-    <a href="index.html" class="nav__logo">
-      <svg width="24" height="24" viewBox="0 0 32 32">
-        <path d="M27 16a11 11 0 1 0-6 9.8" fill="none" stroke="#102A43" stroke-width="3" stroke-linecap="round"/>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg width="22" height="22" viewBox="0 0 32 32">
+        <path d="M27 16a11 11 0 1 0-6 9.8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
         <path d="M22.5 16a6.5 6.5 0 1 0-3.4 5.7" fill="none" stroke="#FF6B4A" stroke-width="2.6" stroke-linecap="round"/>
         <circle cx="24" cy="11.5" r="3.1" fill="#8FBF2E"/>
       </svg>
-      <span class="nav__logo-name">Clart<span class="nav__logo-dot">i</span>s</span>
+      <span class="nav-logo-name">Clart<span class="nav-logo-dot">i</span>s</span>
     </a>
-    <ul class="nav__links">
-      <li><a href="index.html">Accueil</a></li>
-      <li><a href="services.html">Services</a></li>
-      <li><a href="a-propos.html">À propos</a></li>
-      <li><a href="contact.html" class="nav__cta active" style="background:var(--coral)">Nous contacter</a></li>
+    <ul class="nav-links">
+      <li><a href="index.html" data-fr="Accueil" data-en="Home">Accueil</a></li>
+      <li><a href="services.html" data-fr="Services" data-en="Services">Services</a></li>
+      <li><a href="a-propos.html" data-fr="À propos" data-en="About">À propos</a></li>
+      <li><a href="index.html#" data-fr="Réalisations" data-en="Portfolio">Réalisations</a></li>
+      <li><a href="contact.html" class="active" data-fr="Nous contacter" data-en="Contact">Nous contacter</a></li>
     </ul>
-    <button class="nav__burger" aria-label="Menu" onclick="document.getElementById('mobile-menu').classList.toggle('open')">
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-        <rect y="4" width="22" height="2" rx="1" fill="#102A43"/>
-        <rect y="10" width="22" height="2" rx="1" fill="#102A43"/>
-        <rect y="16" width="22" height="2" rx="1" fill="#102A43"/>
-      </svg>
-    </button>
+    <div class="nav-ctrl">
+      <div class="lang-tog">
+        <button id="btn-fr" class="on" onclick="setLang('fr')">FR</button>
+        <button id="btn-en" onclick="setLang('en')">EN</button>
+      </div>
+      <button class="theme-btn" onclick="toggleTheme()">
+        <svg id="ico-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg id="ico-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
+      <button class="nav-client" onclick="document.getElementById('modal').classList.add('open')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        <span data-fr="Espace client" data-en="Client portal">Espace client</span>
+      </button>
+      <button class="burger" onclick="document.getElementById('mob').classList.toggle('open')">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect y="4" width="22" height="2" rx="1" fill="currentColor"/><rect y="10" width="22" height="2" rx="1" fill="currentColor"/><rect y="16" width="22" height="2" rx="1" fill="currentColor"/></svg>
+      </button>
+    </div>
   </div>
 </nav>
-<div class="nav__mobile" id="mobile-menu">
+<div class="mob-menu" id="mob">
   <a href="index.html">Accueil</a>
   <a href="services.html">Services</a>
   <a href="a-propos.html">À propos</a>
-  <a href="contact.html">Contact</a>
+  <a href="index.html#">Réalisations</a>
+  <a href="contact.html">Nous contacter</a>
 </div>
 
+<!-- PAGE HERO -->
 <div class="page-hero">
-  <div class="section__inner">
-    <div class="eyebrow">Contact</div>
-    <h1>Parlons de vos données.</h1>
-    <p>La première rencontre est gratuite et sans engagement. On vous dit honnêtement ce qu'on peut faire pour vous.</p>
+  <svg class="ph-bg" viewBox="0 0 1100 280" preserveAspectRatio="xMidYMid slice">
+    <g transform="translate(880,30) scale(6)" opacity=".6">
+      <path d="M27 16a11 11 0 1 0-6 9.8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M22.5 16a6.5 6.5 0 1 0-3.4 5.7" fill="none" stroke="#FF6B4A" stroke-width="2.6" stroke-linecap="round"/>
+      <circle cx="24" cy="11.5" r="3.1" fill="#8FBF2E"/>
+    </g>
+  </svg>
+  <div class="ph-inner">
+    <div class="ph-eyebrow" data-fr="Nous contacter" data-en="Contact us">Nous contacter</div>
+    <h1 class="ph-title">
+      <span data-fr="Parlons de vos" data-en="Let's talk about your">Parlons de vos</span>
+      <em data-fr=" données." data-en=" data."> données.</em>
+    </h1>
+    <p class="ph-desc" data-fr="La première rencontre est gratuite et sans engagement. On vous dit honnêtement ce qu'on peut faire pour vous." data-en="The first meeting is free and no-commitment. We'll honestly tell you what we can do for you.">La première rencontre est gratuite et sans engagement. On vous dit honnêtement ce qu'on peut faire pour vous.</p>
   </div>
 </div>
 
-<section class="section">
-  <div class="section__inner">
+<!-- CONTACT -->
+<section class="sec" id="contact-form">
+  <div class="sec-inner">
     <div class="contact-grid">
-      <div class="contact-info">
-        <div>
-          <h2>On vous répond sous 24h.</h2>
-          <p>Envoyez-nous votre message ou utilisez une des options ci-dessous. On prend le temps de comprendre votre situation avant de proposer quoi que ce soit.</p>
-        </div>
-        <div class="contact-item">
-          <div class="contact-item__icon" style="background:rgba(143,191,46,.1)">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="#8FBF2E" stroke-width="2"/>
-              <polyline points="22,6 12,13 2,6" stroke="#8FBF2E" stroke-width="2"/>
-            </svg>
+
+      <!-- Infos -->
+      <div class="contact-info reveal">
+        <div class="ci-title" data-fr="On vous répond sous 24h." data-en="We reply within 24h.">On vous répond sous 24h.</div>
+        <p class="ci-sub" data-fr="Envoyez-nous votre message ou utilisez une des options ci-dessous. On prend le temps de comprendre votre situation avant de proposer quoi que ce soit." data-en="Send us your message or use one of the options below. We take the time to understand your situation before proposing anything.">Envoyez-nous votre message ou utilisez une des options ci-dessous. On prend le temps de comprendre votre situation avant de proposer quoi que ce soit.</p>
+
+        <div class="ci-card">
+          <div class="ci-icon" style="background:rgba(143,191,46,.1)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8FBF2E" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           </div>
           <div>
-            <div class="contact-item__label">Courriel</div>
-            <div class="contact-item__value">[ votre@courriel.ca ]</div>
-            <div class="contact-item__sub">Réponse sous 24h</div>
+            <div class="ci-label" data-fr="Courriel" data-en="Email">Courriel</div>
+            <div class="ci-val">[ votre@courriel.ca ]</div>
+            <div class="ci-hint" data-fr="Réponse sous 24h" data-en="Reply within 24h">Réponse sous 24h</div>
           </div>
         </div>
-        <div class="contact-item">
-          <div class="contact-item__icon" style="background:rgba(255,107,74,.1)">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.7A2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.27-.54a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="#FF6B4A" stroke-width="2"/>
-            </svg>
+
+        <div class="ci-card">
+          <div class="ci-icon" style="background:rgba(255,107,74,.1)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF6B4A" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.7A2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.27-.54a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
           </div>
           <div>
-            <div class="contact-item__label">Téléphone</div>
-            <div class="contact-item__value">[ votre numéro ]</div>
-            <div class="contact-item__sub">Lundi–vendredi, 9h–18h EST</div>
+            <div class="ci-label" data-fr="Téléphone" data-en="Phone">Téléphone</div>
+            <div class="ci-val">[ votre numéro ]</div>
+            <div class="ci-hint" data-fr="Lun–ven, 9h–18h EST" data-en="Mon–Fri, 9am–6pm EST">Lun–ven, 9h–18h EST</div>
           </div>
         </div>
-        <div class="contact-item">
-          <div class="contact-item__icon" style="background:rgba(16,42,67,.07)">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="#102A43" stroke-width="2"/>
-              <circle cx="12" cy="10" r="3" stroke="#102A43" stroke-width="2"/>
-            </svg>
+
+        <div class="ci-card">
+          <div class="ci-icon" style="background:rgba(16,42,67,.07)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--fg)" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
           </div>
           <div>
-            <div class="contact-item__label">Localisation</div>
-            <div class="contact-item__value">Québec, Canada</div>
-            <div class="contact-item__sub">Service partout au Québec</div>
+            <div class="ci-label" data-fr="Localisation" data-en="Location">Localisation</div>
+            <div class="ci-val">Québec, Canada</div>
+            <div class="ci-hint" data-fr="Service partout au Québec" data-en="Service across Quebec">Service partout au Québec</div>
           </div>
         </div>
       </div>
 
-      <div class="form-card">
-        <h3>Envoyer un message</h3>
-        <form action="#" method="post">
+      <!-- Formulaire -->
+      <div class="form-card reveal" style="transition-delay:.15s">
+        <h3 data-fr="Envoyer un message" data-en="Send a message">Envoyer un message</h3>
+        <form onsubmit="return false">
           <div class="form-row">
             <div class="form-group">
-              <label for="nom">Votre nom</label>
-              <input type="text" id="nom" name="nom" placeholder="Marie Tremblay" required>
+              <label data-fr="Votre nom" data-en="Your name">Votre nom</label>
+              <input class="form-inp" type="text" placeholder="Marie Tremblay">
             </div>
             <div class="form-group">
-              <label for="entreprise">Entreprise</label>
-              <input type="text" id="entreprise" name="entreprise" placeholder="Acme inc.">
+              <label data-fr="Entreprise" data-en="Company">Entreprise</label>
+              <input class="form-inp" type="text" placeholder="Acme inc.">
             </div>
           </div>
           <div class="form-group">
-            <label for="email">Courriel</label>
-            <input type="email" id="email" name="email" placeholder="marie@exemple.com" required>
+            <label data-fr="Courriel" data-en="Email">Courriel</label>
+            <input class="form-inp" type="email" placeholder="marie@exemple.com">
           </div>
           <div class="form-group">
-            <label for="service">Service qui vous intéresse</label>
-            <select id="service" name="service">
-              <option value="">Sélectionnez un service...</option>
-              <option value="dashboard">Tableau de bord Power BI</option>
-              <option value="rapport">Rapport interactif</option>
-              <option value="analyse">Analyse de performance</option>
-              <option value="entretien">Entretien mensuel</option>
-              <option value="autre">Je ne sais pas encore</option>
+            <label data-fr="Service souhaité" data-en="Service of interest">Service souhaité</label>
+            <select class="form-inp">
+              <option value="" data-fr="Sélectionnez..." data-en="Select...">Sélectionnez...</option>
+              <option data-fr="Tableau de bord Power BI" data-en="Power BI Dashboard">Tableau de bord Power BI</option>
+              <option data-fr="Rapport interactif" data-en="Interactive Report">Rapport interactif</option>
+              <option data-fr="Analyse de performance" data-en="Performance Analysis">Analyse de performance</option>
+              <option data-fr="Entretien mensuel" data-en="Monthly Maintenance">Entretien mensuel</option>
+              <option data-fr="Consultation stratégique" data-en="Strategic Consultation">Consultation stratégique</option>
+              <option data-fr="Formation Power BI" data-en="Power BI Training">Formation Power BI</option>
+              <option data-fr="Je ne sais pas encore" data-en="Not sure yet">Je ne sais pas encore</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="message">Votre message</label>
-            <textarea id="message" name="message" placeholder="Décrivez brièvement vos données, votre équipe et ce que vous aimeriez pouvoir voir..."></textarea>
+            <label data-fr="Votre message" data-en="Your message">Votre message</label>
+            <textarea class="form-inp" placeholder="Décrivez brièvement vos données, votre équipe et ce que vous aimeriez pouvoir voir..."></textarea>
           </div>
-          <button type="submit" class="form-submit">Envoyer le message →</button>
-          <p class="form-note">La première rencontre est gratuite et sans engagement.</p>
+          <button type="submit" class="form-submit">
+            <span data-fr="Envoyer le message →" data-en="Send message →">Envoyer le message →</span>
+          </button>
+          <p class="form-note" data-fr="La première rencontre est gratuite et sans engagement." data-en="The first meeting is free and no-commitment.">La première rencontre est gratuite et sans engagement.</p>
         </form>
       </div>
+
     </div>
   </div>
 </section>
 
-<section class="section faq">
-  <div class="section__inner">
-    <div class="eyebrow">FAQ</div>
-    <h2 style="font-family:var(--display);font-weight:800;font-size:clamp(28px,3.5vw,44px);margin-top:14px;letter-spacing:-.01em;">
-      Questions fréquentes
+<!-- FAQ -->
+<section class="sec faq-sec">
+  <div class="sec-inner">
+    <div class="eyebrow reveal" data-fr="Questions fréquentes" data-en="FAQ">Questions fréquentes</div>
+    <h2 class="sec-title reveal" style="transition-delay:.1s" data-fr="Vous avez des questions ?" data-en="You have questions?">Vous avez des questions ?</h2>
+
+    <div class="faq-list" style="margin-top:48px">
+
+      <div class="faq-item reveal" style="transition-delay:.15s">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text" data-fr="Est-ce que je peux faire ça moi-même avec Power BI ?" data-en="Can I do this myself with Power BI?">Est-ce que je peux faire ça moi-même avec Power BI ?</span>
+          <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></span>
+        </div>
+        <div class="faq-body">
+          <div class="faq-body-inner">
+            <div class="faq-a" data-fr="Techniquement, oui. Mais le vrai travail — nettoyer vos données, les relier correctement, s'assurer que les chiffres sont juste — représente 80% du temps. Et ce temps, pour votre équipe, vaut souvent bien plus que notre tarif. On vous livre quelque chose de fiable en 1 à 3 semaines pendant que vous continuez à faire ce que vous faites de mieux." data-en="Technically, yes. But the real work — cleaning your data, connecting it correctly, making sure the numbers are right — represents 80% of the time. And that time, for your team, is often worth much more than our fee. We deliver something reliable in 1 to 3 weeks while you keep doing what you do best.">Techniquement, oui. Mais le vrai travail — nettoyer vos données, les relier correctement, s'assurer que les chiffres sont juste — représente 80% du temps. Et ce temps, pour votre équipe, vaut souvent bien plus que notre tarif. On vous livre quelque chose de fiable en 1 à 3 semaines pendant que vous continuez à faire ce que vous faites de mieux.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal" style="transition-delay:.2s">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text" data-fr="Mes données sont-elles en sécurité ?" data-en="Is my data secure?">Mes données sont-elles en sécurité ?</span>
+          <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></span>
+        </div>
+        <div class="faq-body">
+          <div class="faq-body-inner">
+            <div class="faq-a" data-fr="Absolument. Vos données restent dans votre environnement (Microsoft 365, votre serveur, etc.). On ne stocke rien de notre côté. Un accord de confidentialité peut être signé avant de commencer — c'est notre pratique standard." data-en="Absolutely. Your data stays in your environment (Microsoft 365, your server, etc.). We don't store anything on our end. A confidentiality agreement can be signed before we start — that's our standard practice.">Absolument. Vos données restent dans votre environnement (Microsoft 365, votre serveur, etc.). On ne stocke rien de notre côté. Un accord de confidentialité peut être signé avant de commencer — c'est notre pratique standard.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal" style="transition-delay:.25s">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text" data-fr="On n'utilise pas Power BI — vous travaillez avec d'autres outils ?" data-en="We don't use Power BI — do you work with other tools?">On n'utilise pas Power BI — vous travaillez avec d'autres outils ?</span>
+          <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></span>
+        </div>
+        <div class="faq-body">
+          <div class="faq-body-inner">
+            <div class="faq-a" data-fr="Power BI est notre spécialité, mais on peut aussi produire des rapports en format Excel, PDF, ou d'autres formats selon vos besoins. Contactez-nous et on voit ensemble ce qui convient le mieux à votre situation." data-en="Power BI is our specialty, but we can also produce reports in Excel, PDF, or other formats based on your needs. Contact us and we'll figure out together what suits your situation best.">Power BI est notre spécialité, mais on peut aussi produire des rapports en format Excel, PDF, ou d'autres formats selon vos besoins. Contactez-nous et on voit ensemble ce qui convient le mieux à votre situation.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal" style="transition-delay:.3s">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text" data-fr="Combien de temps faut-il pour livrer un tableau de bord ?" data-en="How long does it take to deliver a dashboard?">Combien de temps faut-il pour livrer un tableau de bord ?</span>
+          <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></span>
+        </div>
+        <div class="faq-body">
+          <div class="faq-body-inner">
+            <div class="faq-a" data-fr="Entre 1 et 3 semaines selon la complexité du projet et le nombre de sources de données à connecter. On vous confirme le délai exact lors de la première rencontre, avant de commencer quoi que ce soit." data-en="Between 1 and 3 weeks depending on the complexity of the project and the number of data sources to connect. We confirm the exact timeline at the first meeting, before starting anything.">Entre 1 et 3 semaines selon la complexité du projet et le nombre de sources de données à connecter. On vous confirme le délai exact lors de la première rencontre, avant de commencer quoi que ce soit.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal" style="transition-delay:.35s">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text" data-fr="Que se passe-t-il après la livraison ?" data-en="What happens after delivery?">Que se passe-t-il après la livraison ?</span>
+          <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></span>
+        </div>
+        <div class="faq-body">
+          <div class="faq-body-inner">
+            <div class="faq-a" data-fr="Vous devenez autonome — c'est notre objectif. On vous forme à utiliser et naviguer dans votre tableau de bord. Si vous souhaitez qu'on continue à le maintenir et le faire évoluer, on propose une formule mensuelle adaptée à vos besoins." data-en="You become autonomous — that's our goal. We train you to use and navigate your dashboard. If you'd like us to continue maintaining and evolving it, we offer a monthly plan adapted to your needs.">Vous devenez autonome — c'est notre objectif. On vous forme à utiliser et naviguer dans votre tableau de bord. Si vous souhaitez qu'on continue à le maintenir et le faire évoluer, on propose une formule mensuelle adaptée à vos besoins.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal" style="transition-delay:.4s">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text" data-fr="Travaillez-vous avec les fichiers Maestro ?" data-en="Do you work with Maestro files?">Travaillez-vous avec les fichiers Maestro ?</span>
+          <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></span>
+        </div>
+        <div class="faq-body">
+          <div class="faq-body-inner">
+            <div class="faq-a" data-fr="Oui, c'est l'une de nos spécialités. On connecte directement vos fichiers Maestro à Power BI pour que vos données se mettent à jour automatiquement dans votre tableau de bord — sans manipulation manuelle de votre part." data-en="Yes, that's one of our specialties. We connect your Maestro files directly to Power BI so your data updates automatically in your dashboard — without any manual intervention on your part.">Oui, c'est l'une de nos spécialités. On connecte directement vos fichiers Maestro à Power BI pour que vos données se mettent à jour automatiquement dans votre tableau de bord — sans manipulation manuelle de votre part.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-sec">
+  <svg class="cta-bg" viewBox="0 0 1100 500" preserveAspectRatio="xMidYMid slice">
+    <g transform="translate(880,60) scale(7)" opacity=".6">
+      <path d="M27 16a11 11 0 1 0-6 9.8" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"/>
+      <path d="M22.5 16a6.5 6.5 0 1 0-3.4 5.7" fill="none" stroke="#FF6B4A" stroke-width="2.6" stroke-linecap="round"/>
+      <circle cx="24" cy="11.5" r="3.1" fill="#8FBF2E"/>
+    </g>
+    <polyline points="0,400 200,375 400,385 600,348 800,360 1000,325 1100,310" fill="none" stroke="rgba(255,107,74,.18)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <div class="cta-inner">
+    <h2 class="cta-title">
+      <span data-fr="Votre projet commence par" data-en="Your project starts with">Votre projet commence par</span><br>
+      <em data-fr="une conversation." data-en="a conversation.">une conversation.</em>
     </h2>
-    <div class="faq-list">
-      <div class="faq-item">
-        <div class="faq-item__q">Est-ce que je peux faire ça moi-même avec Power BI ?</div>
-        <div class="faq-item__a">Techniquement, oui. Mais le vrai travail — nettoyer vos données, les relier correctement, s'assurer que les chiffres sont juste — représente 80% du temps. Et ce temps, pour votre équipe, vaut souvent bien plus que notre tarif. On vous livre quelque chose de fiable en 3–4 semaines pendant que vous continuez à faire ce que vous faites de mieux.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-item__q">Mes données sont-elles en sécurité ?</div>
-        <div class="faq-item__a">Absolument. Vos données restent dans votre environnement (Microsoft 365, votre serveur, etc.). On ne stocke rien de notre côté. Un accord de confidentialité peut être signé avant de commencer.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-item__q">On n'utilise pas Power BI — vous travaillez avec d'autres outils ?</div>
-        <div class="faq-item__a">Power BI est notre spécialité, mais on peut aussi produire des rapports en format Excel, PDF, ou d'autres formats selon vos besoins. Contactez-nous et on voit ensemble ce qui convient le mieux.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-item__q">Que se passe-t-il après la livraison ?</div>
-        <div class="faq-item__a">Vous devenez autonome — c'est notre objectif. On vous forme à utiliser et naviguer dans votre tableau de bord. Si vous souhaitez qu'on continue à le maintenir et le faire évoluer, on propose une formule mensuelle.</div>
-      </div>
+    <p class="cta-sub" data-fr="La première rencontre est gratuite. On vous dit honnêtement si on peut vous aider — et comment." data-en="The first meeting is free. We'll honestly tell you if and how we can help.">La première rencontre est gratuite. On vous dit honnêtement si on peut vous aider — et comment.</p>
+    <div class="cta-btns">
+      <a href="#contact-form" class="btn-a">
+        <span data-fr="Écrire un message" data-en="Send a message">Écrire un message</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="services.html" class="btn-white" data-fr="Voir nos services" data-en="Our services">Voir nos services</a>
     </div>
   </div>
-</section>
+</div>
 
+<!-- FOOTER -->
 <footer>
-  <div class="footer__inner">
-    <a href="index.html" class="footer__logo">
-      <svg width="20" height="20" viewBox="0 0 32 32">
-        <path d="M27 16a11 11 0 1 0-6 9.8" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="3" stroke-linecap="round"/>
-        <path d="M22.5 16a6.5 6.5 0 1 0-3.4 5.7" fill="none" stroke="#FF6B4A" stroke-width="2.6" stroke-linecap="round"/>
-        <circle cx="24" cy="11.5" r="3.1" fill="#8FBF2E"/>
-      </svg>
-      <span class="footer__logo-name">Clartis</span>
+  <div class="foot-inner">
+    <a href="index.html" class="foot-logo">
+      <svg width="19" height="19" viewBox="0 0 32 32"><path d="M27 16a11 11 0 1 0-6 9.8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M22.5 16a6.5 6.5 0 1 0-3.4 5.7" fill="none" stroke="#FF6B4A" stroke-width="2.6" stroke-linecap="round"/><circle cx="24" cy="11.5" r="3.1" fill="#8FBF2E"/></svg>
+      <span class="foot-logo-name">Clartis</span>
     </a>
-    <ul class="footer__links">
-      <li><a href="services.html">Services</a></li>
-      <li><a href="a-propos.html">À propos</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-    <span class="footer__copy">© 2026 Clartis Analytique · Québec, Canada</span>
+    <div class="foot-right">
+      <span class="foot-social-label" data-fr="Retrouvez-nous ici" data-en="Find us here">Retrouvez-nous ici</span>
+      <a href="https://linkedin.com/company/clartis-analytique" target="_blank" rel="noopener" class="foot-social">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+    <span class="foot-copy">© 2026 Clartis Analytique · Québec, Canada</span>
   </div>
 </footer>
+
+<script>
+/* THEME */
+function toggleTheme(){
+  const d=document.documentElement,dark=d.getAttribute('data-theme')==='dark';
+  d.setAttribute('data-theme',dark?'light':'dark');
+  document.getElementById('ico-sun').style.display=dark?'block':'none';
+  document.getElementById('ico-moon').style.display=dark?'none':'block';
+  localStorage.setItem('cl-theme',dark?'light':'dark');
+}
+(function(){
+  const s=localStorage.getItem('cl-theme')||'light';
+  document.documentElement.setAttribute('data-theme',s);
+  if(s==='dark'){document.getElementById('ico-sun').style.display='none';document.getElementById('ico-moon').style.display='block';}
+})();
+
+/* LANG */
+let lang='fr';
+function setLang(l){
+  lang=l;
+  document.getElementById('btn-fr').classList.toggle('on',l==='fr');
+  document.getElementById('btn-en').classList.toggle('on',l==='en');
+  document.querySelectorAll('[data-fr]').forEach(el=>{const v=el.getAttribute('data-'+l);if(v)el.textContent=v;});
+  document.documentElement.lang=l;
+}
+
+/* MODAL */
+document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');});
+
+/* FAQ ACCORDÉON */
+function toggleFaq(btn){
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  // Ferme tous les autres
+  document.querySelectorAll('.faq-item.open').forEach(i=>{
+    if(i !== item) i.classList.remove('open');
+  });
+  item.classList.toggle('open', !isOpen);
+}
+
+/* REVEAL */
+function reveal(){
+  document.querySelectorAll('.reveal').forEach(el=>{
+    if(el.getBoundingClientRect().top < window.innerHeight - 60) el.classList.add('vis');
+  });
+}
+window.addEventListener('scroll', reveal);
+setTimeout(reveal, 300);
+</script>
 </body>
 </html>
