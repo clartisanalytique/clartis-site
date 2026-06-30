@@ -175,6 +175,10 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:36px 4%;tr
   .h-stat{border-right:none;border-bottom:1px solid var(--card-b)}
   .h-stat:last-child{border-bottom:none}
 }
+
+.nav-logo .logo-img-dark{display:none}
+[data-theme="dark"] .nav-logo .logo-img-light{display:none}
+[data-theme="dark"] .nav-logo .logo-img-dark{display:block}
 </style>
 </head>
 <body>
@@ -200,7 +204,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:36px 4%;tr
     <!-- GAUCHE : logo + liens -->
     <div class="nav-left">
       <a href="index.html" class="nav-logo">
-        <img src="clartis-logo.png" alt="Clartis">
+        <img src="clartis-logo-light.png" alt="Clartis" class="logo-img-light"><img src="clartis-logo-dark.png" alt="Clartis" class="logo-img-dark">
         <span class="nav-logo-name">Clart<span class="nav-i">ı</span>s</span>
       </a>
       <ul class="nav-links">
